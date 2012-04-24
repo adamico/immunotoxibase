@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def link_if_can(action, resource, options={})
-    text = "#{action.to_s.capitalize} #{resource}"
+  def link_if_can(text, action, resource, options={})
+    text ||= "#{action.to_s.capitalize} #{resource}"
     path = case action
            when :new
              new_polymorphic_path(resource)
