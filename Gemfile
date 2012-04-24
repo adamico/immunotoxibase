@@ -11,3 +11,7 @@ end
 gem 'jquery-rails'
 gem "haml", ">= 3.1.4"
 gem "haml-rails", ">= 0.3.4", :group => :development
+gem "cancan"
+gem "devise"
+gem "will_paginate"
+gem "pg_search"

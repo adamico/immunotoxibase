@@ -1,0 +1,19 @@
+%h1 Index of Molecules
+
+= form_tag molecules_path, method: :get, class: "form-search" do
+  = text_field_tag :query, params[:query], class: "input-medium search-query", placeholder: "Enter a name"
+  = submit_tag "Search", name: nil, class: "btn"
+
+- if @molecules.any?
+  %table.table.table-condensed.table-striped
+    %tr
+      %th Name
+      %th Data
+      %th &nbsp;
+    - @molecules.each do |molecule|
+      %tr
+        %td= link_to molecule.name, molecule
+        %td &nbsp;
+        %td= link_if_can :edit, molecule, class: "btn btn-success"
+- else
+  %h2 No molecules returned with the search query: '#{params[:query]}'
