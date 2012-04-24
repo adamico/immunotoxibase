@@ -16,5 +16,5 @@ gem "devise"
 gem "kaminari"
 gem "pg_search"
 gem "simple_form"
-gem "wymeditor-rails", git: "git@github.com:adamico/wymeditor-rails.git", branch: "patch-1"
 gem "heroku"
+gem 'coffee-filter'
