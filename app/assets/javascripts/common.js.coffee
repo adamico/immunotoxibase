@@ -1,0 +1,4 @@
+$ = jQuery
+
+$ ->
+  $(".wymeditor").wymeditor()

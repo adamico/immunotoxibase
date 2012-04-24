@@ -1,3 +1,10 @@
+PATH
+  remote: ../wymeditor-rails
+  specs:
+    wymeditor-rails (0.0.1)
+      jquery-rails
+      rails (> 3.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -133,7 +140,6 @@ GEM
       multi_json (>= 1.0.2)
     warden (1.1.1)
       rack (>= 1.0)
-    wymeditor (0.5.0.rc2)
 
 PLATFORMS
   ruby
@@ -154,4 +160,4 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   simple_form
   uglifier (>= 1.0.3)
-  wymeditor
+  wymeditor-rails!
