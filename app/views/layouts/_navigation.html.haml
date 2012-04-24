@@ -1,1 +1,17 @@
 = link_to "Immunotoxibase", root_path, :class => 'brand'
+%ul.nav
+  %li= link_to "Home", "/"
+  %li.dropdown
+    = link_to "#", class: "dropdown-toggle", :"data-toggle" => "dropdown" do
+      Table of Contents
+      %b.caret
+    %ul.dropdown-menu
+      %li= link_to "Chapters", "/contents/chapters"
+      %li= link_to "Chemical families", "/contents/families"
+      %li= link_to "Molecules", "/contents/molecules"
+      %li.divider
+      %li= link_to "General index", "/contents"
+= form_tag "/", method: :get, class: "navbar-search pull-left" do
+  = text_field_tag :query, params[:query], class: "search-query span2", placeholder: "Search"
+%ul.nav
+  %li= link_to "Advanced Search", "/search"
