@@ -14,7 +14,7 @@
       %tr
         %td= link_to molecule.name, molecule
         %td &nbsp;
-        %td= link_if_can "Edit", :edit, molecule, class: "btn btn-success"
+        %td= link_if_can "Edit", :edit, molecule, class: "btn btn-warning"
   = paginate @molecules, theme: "twitter-bootstrap"
 - else
   %h2 No molecules returned with the search query: '#{params[:query]}'

@@ -2,6 +2,7 @@
 %article
   = simple_format @molecule.description
 %footer
+  = link_if_can "Edit", :edit, @molecule, class: "btn btn-warning"
   = link_to molecules_path, class: "btn btn-primary" do
     %i.icon-list.icon-white
     Back to List
