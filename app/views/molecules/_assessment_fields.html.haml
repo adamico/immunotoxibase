@@ -1,0 +1,9 @@
+.fields
+  = f.input :condition
+  = f.input :effet
+  = f.input :evolution
+  = f.input :level
+  = f.input :_destroy, as: :hidden
+  = link_to "#", class: "btn btn-danger remove_fields" do
+    %i.icon-white.icon-trash
+    Remove Assessment

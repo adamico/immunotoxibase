@@ -23,6 +23,44 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: assessments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE assessments (
+    id integer NOT NULL,
+    reference_id integer,
+    molecule_id integer,
+    measure_id integer,
+    species_id integer,
+    condition character varying(255),
+    effet character varying(255),
+    evolution integer,
+    level character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: assessments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE assessments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: assessments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE assessments_id_seq OWNED BY assessments.id;
+
+
+--
 -- Name: molecules; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -108,6 +146,13 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE assessments ALTER COLUMN id SET DEFAULT nextval('assessments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE molecules ALTER COLUMN id SET DEFAULT nextval('molecules_id_seq'::regclass);
 
 
@@ -116,6 +161,14 @@ ALTER TABLE molecules ALTER COLUMN id SET DEFAULT nextval('molecules_id_seq'::re
 --
 
 ALTER TABLE users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: assessments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY assessments
+    ADD CONSTRAINT assessments_pkey PRIMARY KEY (id);
 
 
 --
@@ -166,3 +219,5 @@ INSERT INTO schema_migrations (version) VALUES ('20120424122522');
 INSERT INTO schema_migrations (version) VALUES ('20120424124000');
 
 INSERT INTO schema_migrations (version) VALUES ('20120424124149');
+
+INSERT INTO schema_migrations (version) VALUES ('20120425131536');

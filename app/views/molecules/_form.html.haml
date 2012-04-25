@@ -4,15 +4,20 @@
 = simple_form_for molecule, html: {class: 'form-horizontal'} do |form|
   = form.input :name, input_html: {class: "span5"}
   = form.input :description, input_html: {class: "wymeditor"}
-  = button_tag type: :submit, class: "btn btn-success" do
-    %i.icon-white.icon-ok
-    Save
-  = button_tag type: :reset, class: "btn btn-danger" do
-    %i.icon-white.icon-remove
-    Reset
-  = link_to molecules_path, class: "btn btn-primary", confirm: "This molecule is not saved, are you sure?" do
-    %i.icon-white.icon-list
-    Back to List
+  = form.fields_for :assessments do |builder|
+    = render 'assessment_fields', f: builder
+  = link_to_add_fields "Add Assessment", form, :assessments
+
+  .actions
+    = button_tag type: :submit, class: "btn btn-success" do
+      %i.icon-white.icon-ok
+      Save
+    = button_tag type: :reset, class: "btn btn-danger" do
+      %i.icon-white.icon-remove
+      Reset
+    = link_to molecules_path, class: "btn btn-primary", confirm: "This molecule is not saved, are you sure?" do
+      %i.icon-white.icon-list
+      Back to List
 
 :coffeescript
   $(".wymeditor").wymeditor
