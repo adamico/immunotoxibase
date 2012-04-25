@@ -2,7 +2,9 @@
 
 = form_tag molecules_path, method: :get, class: "form-search" do
   = text_field_tag :query, params[:query], class: "input-medium search-query", placeholder: "Enter a name"
-  = submit_tag "Search", name: nil, class: "btn"
+  %button{type: "submit", class: "btn btn-primary"}
+    %i.icon-white.icon-search
+    Search
 
 - if @molecules.any?
   %table.table.table-condensed.table-striped
@@ -14,9 +16,11 @@
       %tr
         %td= link_to molecule.name, molecule
         %td &nbsp;
-        %td= link_if_can "Edit", :edit, molecule, class: "btn btn-warning"
+        %td
+          = link_if_can "Edit", :edit, molecule
+          = link_if_can "Destroy", :destroy, molecule
   = paginate @molecules, theme: "twitter-bootstrap"
 - else
   %h2 No molecules returned with the search query: '#{params[:query]}'
 
-= link_if_can nil, :new, Molecule, class: "btn btn-success"
+= link_if_can nil, :new, Molecule
