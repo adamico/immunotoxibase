@@ -4,16 +4,22 @@
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
-SET standard_conforming_strings = off;
+SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET escape_string_warning = off;
 
 --
--- Name: plpgsql; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: -
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
 --
 
-CREATE OR REPLACE PROCEDURAL LANGUAGE plpgsql;
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 SET search_path = public, pg_catalog;
@@ -61,6 +67,41 @@ ALTER SEQUENCE assessments_id_seq OWNED BY assessments.id;
 
 
 --
+-- Name: measures; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE measures (
+    id integer NOT NULL,
+    name character varying(255),
+    parent_id integer,
+    lft integer,
+    rgt integer,
+    depth integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: measures_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE measures_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: measures_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE measures_id_seq OWNED BY measures.id;
+
+
+--
 -- Name: molecules; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -93,12 +134,77 @@ ALTER SEQUENCE molecules_id_seq OWNED BY molecules.id;
 
 
 --
+-- Name: references; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE "references" (
+    id integer NOT NULL,
+    name character varying(255),
+    description text,
+    source character varying(255),
+    url character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: references_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE references_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: references_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE references_id_seq OWNED BY "references".id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE schema_migrations (
     version character varying(255) NOT NULL
 );
+
+
+--
+-- Name: species; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE species (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: species_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE species_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: species_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE species_id_seq OWNED BY species.id;
 
 
 --
@@ -146,21 +252,42 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE assessments ALTER COLUMN id SET DEFAULT nextval('assessments_id_seq'::regclass);
+ALTER TABLE ONLY assessments ALTER COLUMN id SET DEFAULT nextval('assessments_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE molecules ALTER COLUMN id SET DEFAULT nextval('molecules_id_seq'::regclass);
+ALTER TABLE ONLY measures ALTER COLUMN id SET DEFAULT nextval('measures_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+ALTER TABLE ONLY molecules ALTER COLUMN id SET DEFAULT nextval('molecules_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "references" ALTER COLUMN id SET DEFAULT nextval('references_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY species ALTER COLUMN id SET DEFAULT nextval('species_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
@@ -172,11 +299,35 @@ ALTER TABLE ONLY assessments
 
 
 --
+-- Name: measures_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY measures
+    ADD CONSTRAINT measures_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: molecules_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY molecules
     ADD CONSTRAINT molecules_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: references_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY "references"
+    ADD CONSTRAINT references_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: species_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY species
+    ADD CONSTRAINT species_pkey PRIMARY KEY (id);
 
 
 --
@@ -212,8 +363,6 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO schema_migrations (version) VALUES ('0');
-
 INSERT INTO schema_migrations (version) VALUES ('20120424122522');
 
 INSERT INTO schema_migrations (version) VALUES ('20120424124000');
@@ -221,3 +370,9 @@ INSERT INTO schema_migrations (version) VALUES ('20120424124000');
 INSERT INTO schema_migrations (version) VALUES ('20120424124149');
 
 INSERT INTO schema_migrations (version) VALUES ('20120425131536');
+
+INSERT INTO schema_migrations (version) VALUES ('20120426144008');
+
+INSERT INTO schema_migrations (version) VALUES ('20120426144145');
+
+INSERT INTO schema_migrations (version) VALUES ('20120426145036');

@@ -1,6 +1,8 @@
 class Molecule < ActiveRecord::Base
   attr_accessible :description, :name, :assessments_attributes
   has_many :assessments
+  has_many :measures, through: :assessments, dependent: :destroy
+  has_many :species, through: :assessments, dependent: :destroy
 
   accepts_nested_attributes_for :assessments, :reject_if => :all_blank, allow_destroy: true
 
