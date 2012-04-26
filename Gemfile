@@ -18,3 +18,5 @@ gem "pg_search"
 gem "simple_form"
 gem "heroku"
 gem 'coffee-filter'
+gem 'awesome_nested_set', '~> 2.0.0'
+gem 'the_sortable_tree'
