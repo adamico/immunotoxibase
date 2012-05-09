@@ -1,5 +1,7 @@
 class Molecule < ActiveRecord::Base
-  attr_accessible :description, :name, :assessments_attributes
+  attr_accessible :description, :name, :assessments_attributes, :family_id
+
+  belongs_to :family
   has_many :assessments
   has_many :measures, through: :assessments, dependent: :destroy
   has_many :species, through: :assessments, dependent: :destroy

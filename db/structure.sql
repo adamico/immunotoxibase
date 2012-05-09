@@ -67,6 +67,71 @@ ALTER SEQUENCE assessments_id_seq OWNED BY assessments.id;
 
 
 --
+-- Name: chapters; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE chapters (
+    id integer NOT NULL,
+    description text,
+    name character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: chapters_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE chapters_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: chapters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE chapters_id_seq OWNED BY chapters.id;
+
+
+--
+-- Name: families; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE families (
+    id integer NOT NULL,
+    description text,
+    name character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    chapter_id integer
+);
+
+
+--
+-- Name: families_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE families_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: families_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE families_id_seq OWNED BY families.id;
+
+
+--
 -- Name: measures; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -110,7 +175,8 @@ CREATE TABLE molecules (
     name character varying(255),
     description text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    family_id integer
 );
 
 
@@ -259,6 +325,20 @@ ALTER TABLE ONLY assessments ALTER COLUMN id SET DEFAULT nextval('assessments_id
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY chapters ALTER COLUMN id SET DEFAULT nextval('chapters_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY families ALTER COLUMN id SET DEFAULT nextval('families_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY measures ALTER COLUMN id SET DEFAULT nextval('measures_id_seq'::regclass);
 
 
@@ -296,6 +376,22 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 ALTER TABLE ONLY assessments
     ADD CONSTRAINT assessments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: chapters_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY chapters
+    ADD CONSTRAINT chapters_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: families_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY families
+    ADD CONSTRAINT families_pkey PRIMARY KEY (id);
 
 
 --
@@ -376,3 +472,11 @@ INSERT INTO schema_migrations (version) VALUES ('20120426144008');
 INSERT INTO schema_migrations (version) VALUES ('20120426144145');
 
 INSERT INTO schema_migrations (version) VALUES ('20120426145036');
+
+INSERT INTO schema_migrations (version) VALUES ('20120509090554');
+
+INSERT INTO schema_migrations (version) VALUES ('20120509090632');
+
+INSERT INTO schema_migrations (version) VALUES ('20120509090732');
+
+INSERT INTO schema_migrations (version) VALUES ('20120509090759');
