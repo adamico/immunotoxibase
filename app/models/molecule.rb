@@ -12,6 +12,10 @@ class Molecule < ActiveRecord::Base
   pg_search_scope :search, against: [:name, :description],
     using: {tsearch: {dictionary: "english"}}
 
+  def parent
+    family
+  end
+
   def to_s
     name.capitalize
   end

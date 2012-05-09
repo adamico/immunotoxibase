@@ -5,9 +5,16 @@ class MoleculesController < ApplicationController
     @molecules = @molecules.text_search(params[:query]).page(params[:page]).per(10)
   end
 
+  def new
+    @molecule.family_id = params[:family_id]
+  end
+
+  def edit
+  end
+
   def create
     if @molecule.save
-      redirect_to @molecule, notice: "Successfully created #{@molecule}"
+      redirect_to toc_path(level: "molecule", id: @molecule.id), notice: "Successfully created #{@molecule}"
     else
       render :new
     end
@@ -15,7 +22,7 @@ class MoleculesController < ApplicationController
 
   def update
     if @molecule.update_attributes(params[:molecule])
-      redirect_to @molecule, notice: "Successfully updated #{@molecule}"
+      redirect_to toc_path(level: "molecule", id: @molecule.id), notice: "Successfully updated #{@molecule}"
     else
       render :edit
     end

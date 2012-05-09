@@ -20,3 +20,7 @@ gem "heroku"
 gem 'coffee-filter'
 gem 'awesome_nested_set', '~> 2.0.0'
 gem 'the_sortable_tree'
+
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+end

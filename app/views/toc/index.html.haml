@@ -1,0 +1,23 @@
+- if @level.present?
+  %h1
+    = breadcrumb(@item)
+    = @item.name
+  %article
+    = simple_format @item.description
+    - if @children && @children.any?
+      %h3= @children_title
+      = render "list", list: @children, list_class: ""
+  %footer
+    = link_if_can "Edit this #{@item.class.name}", :edit, @item, class: "btn btn-warning"
+    - if @children
+      = link_to new_polymorphic_path(@item.child_class_name.classify.constantize, "#{@item.child_class_name}_id" => @item.id), class: "btn btn-success" do
+        %i.icon-plus.icon-white
+        Add #{@item.child_class_name}
+      = link_to toc_path, class: "btn btn-primary" do
+        %i.icon-list.icon-white
+        Back to Table of Contents
+
+- else
+  %h1 Table of contents
+  = render "list", list: @items, list_class: ""
+  = link_if_can nil, :new, Chapter

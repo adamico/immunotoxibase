@@ -3,4 +3,20 @@ class Family < ActiveRecord::Base
 
   belongs_to :chapter
   has_many :molecules
+
+  def to_s
+    name
+  end
+
+  def parent
+    chapter
+  end
+
+  def children
+    molecules
+  end
+
+  def child_class_name
+    "molecule"
+  end
 end
