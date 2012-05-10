@@ -1,9 +1,10 @@
 Immunotoxibase::Application.routes.draw do
   devise_for :users
 
-  resources :molecules
-  resources :chapters
-  resources :families
+  scope "/admin" do
+    resources :chapters, :families, :molecules, except: [:show, :index]
+  end
+
   match "toc" => "toc#index"
 
   root :to => "home#index"
