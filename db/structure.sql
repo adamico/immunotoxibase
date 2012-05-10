@@ -176,7 +176,11 @@ CREATE TABLE molecules (
     description text,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    family_id integer
+    family_id integer,
+    picture_file_name character varying(255),
+    picture_content_type character varying(255),
+    picture_file_size integer,
+    picture_updated_at timestamp without time zone
 );
 
 
@@ -480,3 +484,5 @@ INSERT INTO schema_migrations (version) VALUES ('20120509090632');
 INSERT INTO schema_migrations (version) VALUES ('20120509090732');
 
 INSERT INTO schema_migrations (version) VALUES ('20120509090759');
+
+INSERT INTO schema_migrations (version) VALUES ('20120510114424');

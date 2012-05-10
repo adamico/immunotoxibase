@@ -1,10 +1,12 @@
 class Molecule < ActiveRecord::Base
-  attr_accessible :description, :name, :assessments_attributes, :family_id
+  attr_accessible :description, :name, :assessments_attributes, :family_id, :picture
 
   belongs_to :family
   has_many :assessments
   has_many :measures, through: :assessments, dependent: :destroy
   has_many :species, through: :assessments, dependent: :destroy
+
+  has_attached_file :picture
 
   accepts_nested_attributes_for :assessments, :reject_if => :all_blank, allow_destroy: true
 

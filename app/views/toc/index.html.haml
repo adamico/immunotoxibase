@@ -2,8 +2,18 @@
   %h1
     = breadcrumb(@item)
     = @item.name
+    %small
+      = link_to "#" do
+        = image_tag("pdficon_large.gif", alt: "PDF Version", title: "PDF Version")
   %article
-    = simple_format @item.description
+    %p.timestamps
+      (Last update:
+      %time{datetime: l(@item.updated_at.to_date)}= l(@item.updated_at.to_date, format: :long)
+      )
+
+    - if @level == "molecule"
+      = image_tag @item.picture.url if @item.picture.present?
+    .description= simple_format @item.description
     - if @children && @children.any?
       %h3= @children_title
       = render "list", list: @children, list_class: ""
