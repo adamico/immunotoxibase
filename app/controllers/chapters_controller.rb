@@ -1,9 +1,6 @@
 class ChaptersController < ApplicationController
   load_and_authorize_resource
 
-  def index
-  end
-
   def create
     if @chapter.save
       redirect_to toc_path(level: "chapter", id: @chapter.id), notice: "Successfully created #{@chapter}"
@@ -18,5 +15,10 @@ class ChaptersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @chapter.destroy
+    redirect_to toc_path, notice: "Successfully destroyed #{@chapter}"
   end
 end

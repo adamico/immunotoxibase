@@ -9,9 +9,6 @@ class MoleculesController < ApplicationController
     @molecule.family_id = params[:family_id]
   end
 
-  def edit
-  end
-
   def create
     if @molecule.save
       redirect_to toc_path(level: "molecule", id: @molecule.id), notice: "Successfully created #{@molecule}"
@@ -30,6 +27,6 @@ class MoleculesController < ApplicationController
 
   def destroy
     @molecule.destroy
-    redirect_to molecules_path, notice: "Successfully destroyed #{@molecule}"
+    redirect_to toc_path, notice: "Successfully destroyed #{@molecule}"
   end
 end
