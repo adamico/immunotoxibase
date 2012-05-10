@@ -1,0 +1,26 @@
+%h3 Tabulated data
+%table.table.table-condensed.table-striped.molecule_assessments
+  %tr
+    %th Measured endpoints
+    %th Species
+    %th Conditions of exposure
+    %th Effect
+    %th p Level
+    %th Ref.
+  - assessments.group_by{|a| a.measure.parent}.each do |parent_measure, ass_by_parent|
+    %tr
+      %td= parent_measure.name
+      %td &nbsp;
+      %td &nbsp;
+      %td &nbsp;
+      %td &nbsp;
+      %td &nbsp;
+    - ass_by_parent.group_by{|a| a.measure}.each do |measure, ass_by_measure|
+      - ass_by_measure.each do |assessment|
+        %tr
+          %td.measure_name= assessment.measure.name
+          %td= assessment.species.name
+          %td= assessment.condition
+          %td= assessment.effet + " " + assessment.evolution.to_s
+          %td= assessment.level
+          %td= assessment.reference_id rescue ""

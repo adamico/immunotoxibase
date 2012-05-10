@@ -7,6 +7,8 @@
     - if @children && @children.any?
       %h3= @children_title
       = render "list", list: @children, list_class: ""
+    - if @level == "molecule" && @item.assessments.any?
+      = render "assessments", assessments: @item.assessments
   %footer
     = link_if_can "Edit this #{@item.class.name}", :edit, @item, class: "btn btn-warning"
     - if @children
