@@ -3,7 +3,7 @@ class TocController < ApplicationController
     if params[:level]
       @level = params[:level]
       klass = params[:level].classify.constantize
-      @item = klass.find(params[:id]) if params[:id]
+      @item = klass.find(params[:id])
       if @item.respond_to?(:children)
         @children = @item.children
         @children_title = @children.first.class.name.pluralize
