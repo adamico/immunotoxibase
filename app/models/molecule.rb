@@ -6,7 +6,12 @@ class Molecule < ActiveRecord::Base
   has_many :measures, through: :assessments, dependent: :destroy
   has_many :species, through: :assessments, dependent: :destroy
 
-  has_attached_file :picture
+  has_attached_file :picture, fog_credentials: {
+                      aws_access_key_id: ENV['S3_KEY'],
+                      aws_secret_access_key: ENV['S3_SECRET'],
+                      provider: 'AWS'
+                    }
+
 
   accepts_nested_attributes_for :assessments, :reject_if => :all_blank, allow_destroy: true
 
