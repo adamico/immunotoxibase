@@ -1,0 +1,7 @@
+%h1
+  - if @parent
+    New child Measure of #{@parent.name}
+  - else
+    New root Measure
+
+= render 'form', measure: @measure

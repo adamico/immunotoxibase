@@ -5,6 +5,7 @@
     %small
       = link_to "#" do
         = image_tag("pdficon_large.gif", alt: "PDF Version", title: "PDF Version")
+  %hr
   %article
     %p.timestamps
       (Last update:
@@ -31,5 +32,6 @@
 
 - else
   %h1 Table of contents
+  %hr
   = render "list", list: @items, list_class: ""
   = link_if_can nil, :new, Chapter

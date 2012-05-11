@@ -1,0 +1,14 @@
+en:
+  measures:
+    sortable:
+      base:
+        link:
+          edit_this: Click to edit measure %{name}
+        new:
+          create: Add root measure
+        controls:
+          add_child: Add child measure for %{name}
+          delete: Delete measure %{name}
+          delete_confirm: Do you want to delete measure %{name}?
+          cant_be_deleted: Cant be deleted. Has nested measures
+          delete_nested_elements: Delete all nested measures

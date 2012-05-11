@@ -1,0 +1,17 @@
+- if opts[:has_children]
+  - delete = link_to(url_for(opts[:namespace] + [node]),
+    :title    =>  t('.delete'),
+    :method   =>  :delete,
+    :confirm  =>  t('.delete_confirm', name: node.name),
+    :class    =>  'button delete') do
+    %i.icon-trash
+- else
+  - delete =  link_to('#',
+    :title    =>  t('.cant_be_deleted'),
+    :onclick  =>  "alert('#{t('.delete_nested_elements')}')",
+    :class    =>  'button undeleted') do
+    %i.icon-ban
+-# OUTPUT
+= link_to new_measure_path(parent_id: node.id), title: t('.add_child', name: node.name), class: 'button' do
+  %i.icon-plus
+= delete

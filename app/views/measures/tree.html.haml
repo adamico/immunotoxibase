@@ -1,0 +1,6 @@
+%h1 Measures Hierarchy
+
+- if @measures.empty?
+  %h2 No entries in database.
+- else
+  = sortable_tree @measures, type: :sortable, path: "measures/sortable/base", new_url: new_measure_path, title: :name

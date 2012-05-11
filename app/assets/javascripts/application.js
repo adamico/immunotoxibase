@@ -14,5 +14,7 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
+//= require jquery.ui.nestedSortable
+//= require sortable/base
 //= require common
 //= require_tree .

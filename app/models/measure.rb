@@ -6,4 +6,8 @@ class Measure < ActiveRecord::Base
 
   has_many :assessments
   has_many :molecules, through: :assessments, dependent: :destroy
+
+  def to_s
+    name
+  end
 end

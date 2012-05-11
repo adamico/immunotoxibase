@@ -1,0 +1,8 @@
+%h1
+  - if @parent
+    Editing measure: #{@measure.name}
+    %small child of #{@parent.name}
+  - else
+    Editing measure: #{@measure.name}
+
+= render 'form', measure: @measure

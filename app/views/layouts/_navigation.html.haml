@@ -15,6 +15,10 @@
 %ul.nav.pull-right
   - if user_signed_in?
     %li
+      = link_to admin_path do
+        %i.icon-cog.icon-white
+        Administration
+    %li
       = link_to destroy_user_session_path, method: "delete" do
         %i.icon-user.icon-white
         Logout

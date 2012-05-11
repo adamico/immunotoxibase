@@ -1,7 +1,18 @@
 %ul{class: "toc #{list_class}"}
   - list.each do |item|
     %li
-      = link_to item.name, level: item.class.name.downcase, id: item.id
+      - level = item.class.name.downcase
+      - item_class = case level
+        - when "chapter"
+          - "icon-book"
+        - when "family"
+          - "icon-file"
+        - else
+          - "icon-tint"
+
+      = link_to level: level, id: item.id do
+        %i{class: item_class}
+        = item.name
       - children = item.children rescue nil
       - if children && children.any?
         = link_to "#", class: "btn toggle-children" do

@@ -1,0 +1,10 @@
+= simple_form_for measure, html: {class: 'form-horizontal', multipart: true} do |form|
+  = form.input :parent_id, as: :hidden
+  = form.input :name
+  .actions
+  = button_tag type: :submit, class: "btn btn-success" do
+    %i.icon-white.icon-ok
+    Save
+  = link_to tree_measures_path, class: "btn btn-primary", confirm: "This measure is not saved, are you sure?" do
+    %i.icon-white.icon-list
+    Back to List
