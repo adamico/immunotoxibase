@@ -1,16 +1,20 @@
 class CreateAssessments < ActiveRecord::Migration
   def change
     create_table :assessments do |t|
-      t.integer :reference_id
-      t.integer :molecule_id
-      t.integer :measure_id
-      t.integer :species_id
-      t.string :condition
-      t.string :effet
+      t.references :reference
+      t.references :molecule
+      t.references :measure
+      t.references :species
+      t.string :condition, :effet, :level
       t.integer :evolution
-      t.string :level
+      t.integer :old_id
+      t.datetime :maj
 
       t.timestamps
     end
+    add_index :assessments, :reference_id
+    add_index :assessments, :molecule_id
+    add_index :assessments, :measure_id
+    add_index :assessments, :species_id
   end
 end

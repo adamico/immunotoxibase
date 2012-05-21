@@ -40,8 +40,10 @@ CREATE TABLE assessments (
     species_id integer,
     condition character varying(255),
     effet character varying(255),
-    evolution integer,
     level character varying(255),
+    evolution integer,
+    old_id integer,
+    maj timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -73,7 +75,8 @@ ALTER SEQUENCE assessments_id_seq OWNED BY assessments.id;
 CREATE TABLE chapters (
     id integer NOT NULL,
     description text,
-    name character varying(255),
+    name character varying(255) NOT NULL,
+    old_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -105,10 +108,12 @@ ALTER SEQUENCE chapters_id_seq OWNED BY chapters.id;
 CREATE TABLE families (
     id integer NOT NULL,
     description text,
-    name character varying(255),
+    name character varying(255) NOT NULL,
+    chapter_id integer,
+    maj timestamp without time zone,
+    old_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    chapter_id integer
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -137,11 +142,12 @@ ALTER SEQUENCE families_id_seq OWNED BY families.id;
 
 CREATE TABLE measures (
     id integer NOT NULL,
-    name character varying(255),
-    parent_id integer,
+    name character varying(255) NOT NULL,
     lft integer,
     rgt integer,
     depth integer,
+    parent_id integer,
+    old_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -172,15 +178,17 @@ ALTER SEQUENCE measures_id_seq OWNED BY measures.id;
 
 CREATE TABLE molecules (
     id integer NOT NULL,
-    name character varying(255),
+    name character varying(255) NOT NULL,
     description text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    family_id integer,
     picture_file_name character varying(255),
     picture_content_type character varying(255),
     picture_file_size integer,
-    picture_updated_at timestamp without time zone
+    picture_updated_at timestamp without time zone,
+    family_id integer,
+    maj timestamp without time zone,
+    old_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -209,10 +217,11 @@ ALTER SEQUENCE molecules_id_seq OWNED BY molecules.id;
 
 CREATE TABLE "references" (
     id integer NOT NULL,
-    name character varying(255),
+    name character varying(255) NOT NULL,
     description text,
     source character varying(255),
     url character varying(255),
+    old_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -252,7 +261,8 @@ CREATE TABLE schema_migrations (
 
 CREATE TABLE species (
     id integer NOT NULL,
-    name character varying(255),
+    name character varying(255) NOT NULL,
+    old_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -439,6 +449,97 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: index_assessments_on_measure_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_assessments_on_measure_id ON assessments USING btree (measure_id);
+
+
+--
+-- Name: index_assessments_on_molecule_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_assessments_on_molecule_id ON assessments USING btree (molecule_id);
+
+
+--
+-- Name: index_assessments_on_reference_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_assessments_on_reference_id ON assessments USING btree (reference_id);
+
+
+--
+-- Name: index_assessments_on_species_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_assessments_on_species_id ON assessments USING btree (species_id);
+
+
+--
+-- Name: index_chapters_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_chapters_on_name ON chapters USING btree (name);
+
+
+--
+-- Name: index_families_on_chapter_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_families_on_chapter_id ON families USING btree (chapter_id);
+
+
+--
+-- Name: index_families_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_families_on_name ON families USING btree (name);
+
+
+--
+-- Name: index_measures_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_measures_on_name ON measures USING btree (name);
+
+
+--
+-- Name: index_measures_on_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_measures_on_parent_id ON measures USING btree (parent_id);
+
+
+--
+-- Name: index_molecules_on_family_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_molecules_on_family_id ON molecules USING btree (family_id);
+
+
+--
+-- Name: index_molecules_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_molecules_on_name ON molecules USING btree (name);
+
+
+--
+-- Name: index_references_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_references_on_name ON "references" USING btree (name);
+
+
+--
+-- Name: index_species_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_species_on_name ON species USING btree (name);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -479,10 +580,4 @@ INSERT INTO schema_migrations (version) VALUES ('20120426145036');
 
 INSERT INTO schema_migrations (version) VALUES ('20120509090554');
 
-INSERT INTO schema_migrations (version) VALUES ('20120509090632');
-
 INSERT INTO schema_migrations (version) VALUES ('20120509090732');
-
-INSERT INTO schema_migrations (version) VALUES ('20120509090759');
-
-INSERT INTO schema_migrations (version) VALUES ('20120510114424');

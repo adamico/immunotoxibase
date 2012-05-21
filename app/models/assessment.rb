@@ -1,8 +1,8 @@
 class Assessment < ActiveRecord::Base
-  attr_accessible :condition, :effet, :evolution, :level, :measure_id, :molecule_id, :reference_id, :species_id
+  attr_accessible :reference_id, :molecule_id, :measure_id, :species_id, :condition, :effet, :level, :evolution, :old_id, :maj
 
+  belongs_to :reference
   belongs_to :molecule
   belongs_to :measure
   belongs_to :species
-  belongs_to :reference
 end

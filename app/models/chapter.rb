@@ -1,7 +1,9 @@
 class Chapter < ActiveRecord::Base
-  attr_accessible :description, :name
+  attr_accessible :description, :name, :old_id
 
   has_many :families
+
+  validates :name, presence: true
 
   def to_s
     name

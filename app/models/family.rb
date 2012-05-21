@@ -1,8 +1,10 @@
 class Family < ActiveRecord::Base
-  attr_accessible :description, :name, :chapter_id
+  attr_accessible :description, :name, :chapter_id, :maj, :old_id
 
   belongs_to :chapter
   has_many :molecules
+
+  validate :name, presence: true
 
   def to_s
     name

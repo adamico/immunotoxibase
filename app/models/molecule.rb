@@ -1,5 +1,5 @@
 class Molecule < ActiveRecord::Base
-  attr_accessible :description, :name, :assessments_attributes, :family_id, :picture
+  attr_accessible :name, :description, :picture, :family_id, :maj, :oldid, :assessments_attributes
 
   belongs_to :family
   has_many :assessments
@@ -12,6 +12,7 @@ class Molecule < ActiveRecord::Base
                       provider: 'AWS'
                     }
 
+  validates :name, presence: true
 
   accepts_nested_attributes_for :assessments, :reject_if => :all_blank, allow_destroy: true
 
