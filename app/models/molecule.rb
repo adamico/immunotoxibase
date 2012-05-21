@@ -1,4 +1,5 @@
 class Molecule < ActiveRecord::Base
+  include Concerns::Models::Prolific
   attr_accessible :name, :description, :picture, :family_id, :maj, :oldid, :assessments_attributes
 
   belongs_to :family

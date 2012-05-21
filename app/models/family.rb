@@ -1,4 +1,5 @@
 class Family < ActiveRecord::Base
+  include Concerns::Models::Prolific
   attr_accessible :description, :name, :chapter_id, :maj, :old_id
 
   belongs_to :chapter

@@ -1,4 +1,5 @@
 class Chapter < ActiveRecord::Base
+  include Concerns::Models::Prolific
   attr_accessible :description, :name, :old_id
 
   has_many :families
