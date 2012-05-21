@@ -1,4 +1,14 @@
 module ApplicationHelper
+  def maj(instance)
+    if instance.respond_to?(:maj)
+      content_tag :p, class: "timestamps" do
+        safe_concat("(Last update: " +
+          content_tag(:time, l(@item.updated_at.to_date, format: :long), datetime: l(@item.updated_at.to_date)) + ")"
+        )
+      end
+    end
+  end
+
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).klass.new
     id = new_object.object_id

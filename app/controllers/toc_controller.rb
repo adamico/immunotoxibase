@@ -10,7 +10,7 @@ class TocController < ApplicationController
         @children_title = @children_title.prepend("Chemical ") if @children_title == "Families"
       end
     else
-      @items = Chapter.all
+      @chapters = Chapter.order(:name)
     end
   end
 end
