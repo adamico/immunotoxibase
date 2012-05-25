@@ -1,0 +1,7 @@
+%h1
+  - if @parent
+    New child Section of #{@parent.name}
+  - else
+    New Chapter
+
+= render 'form', section: @section

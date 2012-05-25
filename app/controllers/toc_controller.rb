@@ -5,7 +5,7 @@ class TocController < ApplicationController
       klass = params[:level].classify.constantize
       @item = klass.find(params[:id])
     else
-      @chapters = Chapter.order(:name)
+      @chapters = Section.root.children.order(:name)
     end
   end
 end

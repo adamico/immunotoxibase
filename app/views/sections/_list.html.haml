@@ -1,0 +1,20 @@
+%ul{class: "toc #{list_class}"}
+  - list.each do |item|
+    %li
+      - level = item.depth
+      - item_class = case level
+        - when 0
+          - "icon-book"
+        - when 1
+          - "icon-file"
+        - else
+          - "icon-tint"
+
+      = link_to level: level, id: item.id do
+        %i{class: item_class}
+        = item.name
+      - children = item.children rescue nil
+      - if children && children.any?
+        = link_to "#", class: "btn toggle-children" do
+          %i.icon-plus
+        = render "list", list: children, list_class: "children"

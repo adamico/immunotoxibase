@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "routes for administration" do
-  %w(chapters families molecules).each do |model|
+  %w(sections measures).each do |model|
     it "routes /admin/#{model}/new to #{model}#new" do
       { get: "/admin/#{model}/new" }.should route_to(
         controller: "#{model}",

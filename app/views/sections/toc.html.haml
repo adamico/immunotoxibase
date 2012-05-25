@@ -1,0 +1,10 @@
+%article
+  %header
+    %h1 Table of contents
+  %hr
+  = render "list", list: @sections, list_class: "" if @sections.any?
+  %footer
+    - if can? :new, Section
+      = link_to new_section_path, class: "btn btn-success" do
+        %i.icon-white.icon-plus
+        New Chapter

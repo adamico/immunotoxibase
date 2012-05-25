@@ -1,10 +1,10 @@
 = content_for :head do
   %script{type: "text/javascript", src: "/javascripts/wymeditor/jquery.wymeditor.min.js"}
 
-= simple_form_for family, html: {class: "form-horizontal"} do |form|
+= simple_form_for section, html: {class: "form-horizontal"} do |form|
   = form.input :name, input_html: {class: "span5"}
   = form.input :description, input_html: {class: "wymeditor"}
-  = form.input :chapter_id, as: :hidden
+  = form.input :parent_id, as: :hidden
 
   .actions
     = button_tag type: :submit, class: "btn btn-success" do
@@ -13,7 +13,7 @@
     = button_tag type: :reset, class: "btn btn-danger" do
       %i.icon-white.icon-remove
       Reset
-    = link_to toc_path, class: "btn btn-primary", confirm: "This family is not saved, are you sure?" do
+    = link_to toc_path, class: "btn btn-primary", confirm: "This section is not saved, are you sure?" do
       %i.icon-white.icon-list
       Back to List
 

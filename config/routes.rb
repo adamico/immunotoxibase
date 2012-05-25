@@ -4,6 +4,7 @@ Immunotoxibase::Application.routes.draw do
   match "admin" => "home#admin"
 
   scope "/admin" do
+    resources :sections, except: [:show, :index]
     resources :chapters, :families, :molecules, except: [:show, :index]
     resources :measures, except: [:show, :index] do
       collection do
@@ -13,7 +14,13 @@ Immunotoxibase::Application.routes.draw do
     end
   end
 
-  match "toc" => "toc#index"
+  resources :sections, only: :show do
+    collection do
+      get :toc
+    end
+  end
+
+  match "toc" => "sections#toc"
 
   root :to => "home#index"
 end

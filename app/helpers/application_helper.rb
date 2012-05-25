@@ -45,7 +45,7 @@ module ApplicationHelper
     if instance.respond_to?(:maj)
       content_tag :p, class: "timestamps" do
         safe_concat("(Last update: " +
-          content_tag(:time, l(@item.updated_at.to_date, format: :long), datetime: l(@item.updated_at.to_date)) + ")"
+          content_tag(:time, l(@item.maj.to_date, format: :long), datetime: l(@item.maj.to_date)) + ")"
         )
       end
     end

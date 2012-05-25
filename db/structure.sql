@@ -69,74 +69,6 @@ ALTER SEQUENCE assessments_id_seq OWNED BY assessments.id;
 
 
 --
--- Name: chapters; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE chapters (
-    id integer NOT NULL,
-    description text,
-    name character varying(255) NOT NULL,
-    old_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: chapters_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE chapters_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: chapters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE chapters_id_seq OWNED BY chapters.id;
-
-
---
--- Name: families; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE families (
-    id integer NOT NULL,
-    description text,
-    name character varying(255) NOT NULL,
-    chapter_id integer,
-    maj timestamp without time zone,
-    old_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: families_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE families_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: families_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE families_id_seq OWNED BY families.id;
-
-
---
 -- Name: measures; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -170,45 +102,6 @@ CREATE SEQUENCE measures_id_seq
 --
 
 ALTER SEQUENCE measures_id_seq OWNED BY measures.id;
-
-
---
--- Name: molecules; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE molecules (
-    id integer NOT NULL,
-    name character varying(255) NOT NULL,
-    description text,
-    picture_file_name character varying(255),
-    picture_content_type character varying(255),
-    picture_file_size integer,
-    picture_updated_at timestamp without time zone,
-    family_id integer,
-    maj timestamp without time zone,
-    old_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: molecules_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE molecules_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: molecules_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE molecules_id_seq OWNED BY molecules.id;
 
 
 --
@@ -253,6 +146,48 @@ ALTER SEQUENCE references_id_seq OWNED BY "references".id;
 CREATE TABLE schema_migrations (
     version character varying(255) NOT NULL
 );
+
+
+--
+-- Name: sections; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sections (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    description text,
+    picture_file_name character varying(255),
+    picture_content_type character varying(255),
+    picture_file_size integer,
+    picture_updated_at timestamp without time zone,
+    lft integer,
+    rgt integer,
+    depth integer,
+    parent_id integer,
+    maj timestamp without time zone,
+    old_id character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sections_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE sections_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE sections_id_seq OWNED BY sections.id;
 
 
 --
@@ -339,20 +274,6 @@ ALTER TABLE ONLY assessments ALTER COLUMN id SET DEFAULT nextval('assessments_id
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY chapters ALTER COLUMN id SET DEFAULT nextval('chapters_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY families ALTER COLUMN id SET DEFAULT nextval('families_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY measures ALTER COLUMN id SET DEFAULT nextval('measures_id_seq'::regclass);
 
 
@@ -360,14 +281,14 @@ ALTER TABLE ONLY measures ALTER COLUMN id SET DEFAULT nextval('measures_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY molecules ALTER COLUMN id SET DEFAULT nextval('molecules_id_seq'::regclass);
+ALTER TABLE ONLY "references" ALTER COLUMN id SET DEFAULT nextval('references_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY "references" ALTER COLUMN id SET DEFAULT nextval('references_id_seq'::regclass);
+ALTER TABLE ONLY sections ALTER COLUMN id SET DEFAULT nextval('sections_id_seq'::regclass);
 
 
 --
@@ -393,22 +314,6 @@ ALTER TABLE ONLY assessments
 
 
 --
--- Name: chapters_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY chapters
-    ADD CONSTRAINT chapters_pkey PRIMARY KEY (id);
-
-
---
--- Name: families_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY families
-    ADD CONSTRAINT families_pkey PRIMARY KEY (id);
-
-
---
 -- Name: measures_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -417,19 +322,19 @@ ALTER TABLE ONLY measures
 
 
 --
--- Name: molecules_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY molecules
-    ADD CONSTRAINT molecules_pkey PRIMARY KEY (id);
-
-
---
 -- Name: references_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "references"
     ADD CONSTRAINT references_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sections_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sections
+    ADD CONSTRAINT sections_pkey PRIMARY KEY (id);
 
 
 --
@@ -477,27 +382,6 @@ CREATE INDEX index_assessments_on_species_id ON assessments USING btree (species
 
 
 --
--- Name: index_chapters_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_chapters_on_name ON chapters USING btree (name);
-
-
---
--- Name: index_families_on_chapter_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_families_on_chapter_id ON families USING btree (chapter_id);
-
-
---
--- Name: index_families_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_families_on_name ON families USING btree (name);
-
-
---
 -- Name: index_measures_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -512,24 +396,24 @@ CREATE INDEX index_measures_on_parent_id ON measures USING btree (parent_id);
 
 
 --
--- Name: index_molecules_on_family_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_molecules_on_family_id ON molecules USING btree (family_id);
-
-
---
--- Name: index_molecules_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_molecules_on_name ON molecules USING btree (name);
-
-
---
 -- Name: index_references_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_references_on_name ON "references" USING btree (name);
+
+
+--
+-- Name: index_sections_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_sections_on_name ON sections USING btree (name);
+
+
+--
+-- Name: index_sections_on_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_sections_on_parent_id ON sections USING btree (parent_id);
 
 
 --
@@ -564,8 +448,6 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO schema_migrations (version) VALUES ('20120424122522');
-
 INSERT INTO schema_migrations (version) VALUES ('20120424124000');
 
 INSERT INTO schema_migrations (version) VALUES ('20120424124149');
@@ -578,6 +460,4 @@ INSERT INTO schema_migrations (version) VALUES ('20120426144145');
 
 INSERT INTO schema_migrations (version) VALUES ('20120426145036');
 
-INSERT INTO schema_migrations (version) VALUES ('20120509090554');
-
-INSERT INTO schema_migrations (version) VALUES ('20120509090732');
+INSERT INTO schema_migrations (version) VALUES ('20120523135844');

@@ -1,0 +1,70 @@
+old_id,name,parent_id
+1,"antiSRBC direct PFC",18
+22,"C.albicans uptake (PMNL)",6
+3,"Chemotaxis",nil
+4,"Boyden (PMNL)",3
+5,"agarose (PMNL)",3
+6,"Phagocytosis",nil
+7,"chemiluminescence (PMNL)",6
+8,"S.aureus uptake (PMNL)",6
+9,"oxidative burst (neutrophils)",6
+17,"Cellular immunity",nil
+18,"Humoral immunity",nil
+23,"E. coli uptake (PMNL)",6
+19,"Histopathology",nil
+16,"C.albicans (PMNL)",14
+14,"Intracellular killing",nil
+20,"Organ weights",19
+21,"T lymphocyte proliferation",17
+24,"K. pneumoniae uptake (alveolar macrophages)",6
+25,"yeast cell uptake (PMNL)",6
+26,"NBT reduction test",6
+27,"K. pneumoniae (alveolar macrophages)",14
+28,"Yeast cells (PMNL)",14
+29,"Host resistance assay",nil
+30,"Host resistance assays",nil
+31,"Experimental infection (Kl. pneumoniae)",30
+32,"Allergenicity/immunogenicity",nil
+33,"Contact sensitization (Buehler test)",32
+34,"Contact sensitization (optimization test)",32
+35,"Lymphocyte numbers (spleen)",19
+36,"Lymphocyte numbers (thymus)",19
+37,"Lymphocyte numbers (Peyer""s patches)",19
+54,"Delayed-type hypersensitivity (SRBC)",17
+38,"serum IgG levels",18
+39,"serum IgG1 levels",18
+40,"serum IgG2a levels",18
+41,"serum IgE levels",18
+42,"T lymphocyte proliferation (PHA)",17
+43,"IL-4 production (splenocytes)",17
+44,"IFN-g production (splenocytes)",17
+45,"Contact sensitization (maximization test)",32
+46,"Contact sensitization (Landsteiner-Draize test)",32
+47,"Contact sensitization (open cutaneous test)",32
+48,"S. aureus (PMNL)",14
+49,"LLNA",32
+50,"spleen weight",19
+51,"antiSRBC hemagglutinin titer",18
+52,"B lymphocyte proliferation (LPS)",18
+53,"51Cr release",77
+55,"T lymphocyte proliferation (conA)",17
+56,"T lymphocyte proliferation (picryl chloride)",17
+57,"T lymphocyte proliferation (spontaneous)",17
+58,"Delayed-type hypersensitivity (picryl chloride)",17
+59,"IL-2 production (splenocytes)",17
+60,"IL-3 production (splenocytes)",17
+70,"Autoimmune disease (diabetes)",72
+62,"IL-1 production (macrophages)",17
+63,"IL-6 production (peritoneal macrophages)",17
+64,"IL-1b mRNA expression (macrophages)",17
+65,"IL-2 mRNA expression (macrophages)",17
+66,"TNF-a mRNA expression (macrophages)",17
+67,"GvH local reaction",17
+68,"GvH systemic reaction",17
+69,"GvH systemic reaction (splenomegaly)",17
+72,"Autoimmunity",nil
+73,"thymus weight",19
+74,"mesenteric lymph nodes weight",19
+75,"Lymphocyte numbers (blood)",19
+76,"Monocyte numbers (blood)",19
+77,"NK cell activity",nil

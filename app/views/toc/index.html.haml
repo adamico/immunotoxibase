@@ -25,4 +25,7 @@
     %hr
     = render "list", list: @chapters, list_class: ""
     %footer
-      = link_if_can nil, :new, Chapter
+      - if can? :new, Section
+        = link_to new_section_path(parent_id: 1), class: "btn btn-success" do
+          %i.icon-white.icon-plus
+          New Chapter
