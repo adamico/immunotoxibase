@@ -24,5 +24,15 @@ gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem "fog"
 
 group :test, :development do
-  gem "rspec-rails", "~> 2.0"
+  gem "rspec-rails", "~> 2.6"
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'spork', '~> 0.9.0.rc'
+  gem 'capybara'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'launchy'    # So you can do Then show me the page
+  gem 'pickle'
 end
