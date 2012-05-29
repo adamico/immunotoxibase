@@ -27,6 +27,10 @@ group :test, :development do
   gem "rspec-rails", "~> 2.6"
 end
 
+group :development do
+  gem 'sextant'
+end
+
 group :test do
   gem 'factory_girl_rails'
   gem 'spork', '~> 0.9.0.rc'
