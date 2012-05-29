@@ -1,26 +1,4 @@
 module SectionsHelper
-  def old_breadcrumb(item)
-    if item
-      parent = item.parent
-      if parent
-        name = parent.name
-        path = parent
-      else
-        name = "Table of Contents"
-        path = toc_path
-      end
-      parent = item.parent
-      [
-        breadcrumb(parent),
-        link_to(name, path),
-        " > ",
-        item.name
-      ].join("").html_safe
-    else
-      ""
-    end
-  end
-
   def breadcrumb(item)
     content_tag :ul, class: "breadcrumb" do
       lis = []
