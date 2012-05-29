@@ -22,6 +22,7 @@ gem 'awesome_nested_set', '~> 2.1.0'
 gem 'the_sortable_tree', "~> 1.9.2"
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem "fog"
+gem "draper"
 
 group :test, :development do
   gem "rspec-rails", "~> 2.6"
