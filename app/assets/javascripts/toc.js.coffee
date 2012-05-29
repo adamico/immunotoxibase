@@ -2,6 +2,7 @@ $ = jQuery
 $ ->
   $(".toggle-children").on "click", (e) ->
     $(this).next().toggle()
+    toggleMinusPlus($(this))
     e.preventDefault()
   rows = $(".molecule_assessments tr")
   for i in [rows.length..0]
@@ -14,3 +15,8 @@ $ ->
       console.log "previous cell in column is "
       console.log $prev_cell_in_col
       $cell.html("") if $prev_cell_in_col.html() is $cell.html()
+
+toggleMinusPlus = (element) ->
+  $icon = $(element.find("i"))
+  $icon.toggleClass("icon-plus icon-minus")
+

@@ -5,6 +5,9 @@ class SectionsController < ApplicationController
     @sections = Section.roots
   end
 
+  def show
+  end
+
   def new
     if params[:parent_id]
       @parent = Section.find(params[:parent_id])

@@ -10,7 +10,7 @@
         - else
           - "icon-tint"
 
-      = link_to level: level, id: item.id do
+      = link_to item do
         %i{class: item_class}
         = item.name
       - children = item.children rescue nil
