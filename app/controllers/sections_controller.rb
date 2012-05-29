@@ -2,10 +2,8 @@ class SectionsController < ApplicationController
   load_and_authorize_resource
 
   def toc
-    @sections = Section.roots
-  end
-
-  def show
+    section = Section.find(params[:section]) if params[:section]
+    @section = SectionDecorator.find(section) if section
   end
 
   def new
@@ -23,10 +21,12 @@ class SectionsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
+    if @section.update_attributes
+      redirect_to @section, notice: "Successfully updated #{@section}"
+    else
+      render :edit
+    end
   end
 
   def destroy

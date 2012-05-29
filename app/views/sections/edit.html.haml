@@ -1,2 +1,3 @@
-%h1 Sections#edit
-%p Find me in app/views/sections/edit.html.haml
+%h1 Edit #{@section.depth_name}: #{@section.name}
+
+= render 'form', section: @section

@@ -10,7 +10,7 @@
         - else
           - "icon-tint"
 
-      = link_to item do
+      = link_to toc_path(section: item.id) do
         %i{class: item_class}
         = item.name
       - children = item.children rescue nil

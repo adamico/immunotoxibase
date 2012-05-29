@@ -22,6 +22,30 @@ class Section < ActiveRecord::Base
   pg_search_scope :search, against: [:name, :description],
     using: {tsearch: {dictionary: "english"}}
 
+  def depth_name
+    case depth
+    when 0
+      "Chapter"
+    when 1
+      "Chemical Family"
+    when 2
+      "Molecule"
+    end
+  end
+
+  def child_name
+    case depth
+    when 0
+      "Chemical Family"
+    when 1
+      "Molecule"
+    end
+  end
+
+  def molecule?
+    depth == 2
+  end
+
   def to_s
     name
   end
