@@ -20,11 +20,24 @@ module SectionsHelper
   end
 
   def back_to_record_or_toc(section)
-    parent = params[:id].present? ? section.parent : Section.find(params[:parent_id])
-    path = parent ? section_path(parent) : toc_path
-    title = parent ? "Back to #{parent.name}" : "Back to Table of Contents"
-    link_to(path, class: "btn btn-primary", confirm: "This #{section.depth_name} is not saved, are you sure?") do
-      safe_concat(content_tag(:i, nil, class: "icon-white icon-list") + " #{title}")
+    if section.new_record?
+      parent = Section.find(params[:parent_id]) if params[:parent_id].present?
+      if parent
+        path = toc_path(section: parent)
+        title = parent.name
+        depth_name = parent.child_name
+      else
+        path = toc_path
+        title = "Table of Contents"
+        depth_name = "Chapter"
+      end
+    else
+      path = toc_path(section: section)
+      title = section.name
+      depth_name = section.depth_name
+    end
+    link_to(path, class: "btn btn-primary", confirm: "This #{depth_name} is not saved, are you sure?") do
+      safe_concat(content_tag(:i, nil, class: "icon-white icon-list") + " Back to #{title}")
     end
   end
 
