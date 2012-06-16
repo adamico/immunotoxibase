@@ -19,7 +19,7 @@ module SectionsHelper
     end
   end
 
-  def back_to_record_or_toc(section)
+  def back_to_record(section)
     if section.new_record?
       parent = Section.find(params[:parent_id]) if params[:parent_id].present?
       if parent
