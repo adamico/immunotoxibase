@@ -1,11 +1,11 @@
 module SectionsHelper
-  def new_child_of(section)
+  def link_to_add_child_of(section)
     if section
       unless section.molecule?
         if can? :create, Section
           link_to(new_section_path(parent_id: section.to_param), class: "btn btn-success") do
             safe_concat(content_tag(:i, nil, class: "icon-plus icon-white") +
-            "Add #{section.child_name}")
+            "Add #{section.child_name} for #{section.depth_name}: #{section.name}")
           end
         end
       end
@@ -13,7 +13,7 @@ module SectionsHelper
       if can? :create, Section
         link_to(new_section_path, class: "btn btn-success") do
           safe_concat(content_tag(:i, nil, class: "icon-white icon-plus") +
-          " New Chapter")
+          " Add a new chapter")
         end
       end
     end
@@ -36,9 +36,7 @@ module SectionsHelper
       title = section.name
       depth_name = section.depth_name
     end
-    link_to(path, class: "btn btn-primary", confirm: "This #{depth_name} is not saved, are you sure?") do
-      safe_concat(content_tag(:i, nil, class: "icon-white icon-list") + " Back to #{title}")
-    end
+    link_to_item(section, false, "Back to #{title}", "btn btn-primary")
   end
 
   def children_list(section)
@@ -50,8 +48,8 @@ module SectionsHelper
     html.join("").html_safe
   end
 
-  def link_to_item(section, condition=false)
-    link_to_unless(condition, "<i class=\"#{icon_css_class(section)}\"></i> #{section.name}".html_safe, toc_path(chapter: get_tree_params(section)[:chapter].to_param, family: get_tree_params(section)[:family].to_param, molecule: get_tree_params(section)[:molecule].to_param))
+  def link_to_item(section, condition=false, name=section.name, css_class = nil)
+    link_to_unless(condition, "<i class=\"#{icon_css_class(section)}\"></i> #{name}".html_safe, toc_path(chapter: get_tree_params(section)[:chapter].to_param, family: get_tree_params(section)[:family].to_param, molecule: get_tree_params(section)[:molecule].to_param), class: css_class)
   end
 
   def get_tree_params(section)
@@ -72,13 +70,14 @@ module SectionsHelper
 
   def icon_css_class(section)
     level = section.depth
+    icon_class = "icon-white "
     case level
       when 0
-        icon_class = "icon-book"
+        icon_class += "icon-book"
       when 1
-        icon_class = "icon-file"
+        icon_class += "icon-file"
       else
-        icon_class = "icon-tint"
+        icon_class += "icon-tint"
       end
   end
 
@@ -94,11 +93,10 @@ module SectionsHelper
   end
 
   def link_to_edit(section)
-    if @section
-      if can? :edit, @section
-        link_to(edit_section_path(@section), class: "btn btn-inverse") do
-            safe_concat(content_tag(:i, nil, class: "icon-pencil icon-white") +
-            " Edit this #{@section.depth_name}")
+    if section
+      if can? :edit, section
+        link_to(edit_section_path(section), class: "btn btn-primary") do
+            safe_concat(content_tag(:i, nil, class: "icon-pencil icon-white") + " Edit #{section.depth_name}: #{section.name}")
         end
       end
     end
