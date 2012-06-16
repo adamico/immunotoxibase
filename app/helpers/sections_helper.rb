@@ -23,20 +23,18 @@ module SectionsHelper
     if section.new_record?
       parent = Section.find(params[:parent_id]) if params[:parent_id].present?
       if parent
-        path = toc_path(section: parent)
         title = parent.name
-        depth_name = parent.child_name
+        depth_name = parent.depth_name
+        target = parent
       else
-        path = toc_path
-        title = "Table of Contents"
-        depth_name = "Chapter"
+        return link_to "Back to Table of Contents", toc_path, class: "btn btn-primary"
       end
     else
-      path = toc_path(section: section)
       title = section.name
       depth_name = section.depth_name
+      target = section
     end
-    link_to_item(section, false, "Back to #{title}", "btn btn-primary")
+    link_to_item(target, false, "Back to #{depth_name} #{title}", "btn btn-primary")
   end
 
   def children_list(section)

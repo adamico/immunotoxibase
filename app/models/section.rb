@@ -28,7 +28,7 @@ class Section < ActiveRecord::Base
   DEPTH = {0 => "chapter", 1 => "family", 2 => "molecule"}
 
   def depth_name
-    DEPTH[depth]
+    depth ? DEPTH[depth] : parent.child_name
   end
 
   def child_name
@@ -36,7 +36,11 @@ class Section < ActiveRecord::Base
   end
 
   def molecule?
-    depth ? depth == 2 : parent.depth == 1
+    if parent
+      depth ? depth == 2 : parent.depth == 1
+    else
+      false
+    end
   end
 
   def to_s
