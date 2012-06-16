@@ -1,6 +1,12 @@
 %h1 Measures Hierarchy
 
 - if @measures.empty?
-  %h2 No entries in database.
+  %div.alert
+    %strong My apologies...
+    No measures entries in database.
+    %p
+      = link_to new_measure_path, class: "btn btn-success" do
+        %i.icon-plus.icon-white
+        Create your first measure
 - else
   = sortable_tree @measures, type: :sortable, path: "measures/sortable/base", new_url: new_measure_path, title: :name
