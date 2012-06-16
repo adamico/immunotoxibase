@@ -1,6 +1,9 @@
 class Section < ActiveRecord::Base
   include TheSortableTree::Scopes
-  attr_accessible :name, :description, :picture, :maj, :parent_id, :old_id, :assessments_attributes
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
+  attr_accessible :name, :description, :picture, :maj, :parent_id, :old_id, :assessments_attributes, :slug
 
   acts_as_nested_set
 
@@ -22,24 +25,14 @@ class Section < ActiveRecord::Base
   pg_search_scope :search, against: [:name, :description],
     using: {tsearch: {dictionary: "english"}}
 
+  DEPTH = {0 => "chapter", 1 => "family", 2 => "molecule"}
+
   def depth_name
-    case depth
-    when 0
-      "Chapter"
-    when 1
-      "Chemical Family"
-    when 2
-      "Molecule"
-    end
+    DEPTH[depth]
   end
 
   def child_name
-    case depth
-    when 0
-      "Chemical Family"
-    when 1
-      "Molecule"
-    end
+    molecule? ? nil : DEPTH[depth + 1]
   end
 
   def molecule?

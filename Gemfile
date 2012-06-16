@@ -24,6 +24,7 @@ gem 'the_sortable_tree', "~> 1.9.2"
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem "fog"
 gem "draper"
+gem "friendly_id", "~> 4.0.1"
 
 group :test, :development do
   gem "rspec-rails", "~> 2.6"

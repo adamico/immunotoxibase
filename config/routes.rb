@@ -13,7 +13,7 @@ Immunotoxibase::Application.routes.draw do
     end
   end
 
-  match "toc" => "sections#toc"
+  match "toc(/:chapter(/:family(/:molecule)))" => "sections#toc", as: "toc"
 
   root :to => "home#index"
 end

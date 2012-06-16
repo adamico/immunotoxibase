@@ -1,8 +1,11 @@
 class SectionsController < ApplicationController
   load_and_authorize_resource
 
+  helper_method :current_section_depth
+
   def toc
-    section = Section.find(params[:section]) if params[:section]
+    section = Section.find(params[current_section_depth]) if current_section_depth
+    @depth = current_section_depth
     @section = SectionDecorator.find(section) if section
   end
 
@@ -30,5 +33,24 @@ class SectionsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def current_section_depth
+    if params[:molecule].nil?
+      if params[:family].nil?
+        if params[:chapter].nil?
+          depth = nil
+        else
+          depth = "chapter"
+        end
+      else
+        depth = "family"
+      end
+    else
+      depth = "molecule"
+    end
+    depth
   end
 end

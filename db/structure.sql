@@ -167,7 +167,8 @@ CREATE TABLE sections (
     maj timestamp without time zone,
     old_id character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    slug character varying(255)
 );
 
 
@@ -417,6 +418,13 @@ CREATE INDEX index_sections_on_parent_id ON sections USING btree (parent_id);
 
 
 --
+-- Name: index_sections_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_sections_on_slug ON sections USING btree (slug);
+
+
+--
 -- Name: index_species_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -461,3 +469,5 @@ INSERT INTO schema_migrations (version) VALUES ('20120426144145');
 INSERT INTO schema_migrations (version) VALUES ('20120426145036');
 
 INSERT INTO schema_migrations (version) VALUES ('20120523135844');
+
+INSERT INTO schema_migrations (version) VALUES ('20120616122927');

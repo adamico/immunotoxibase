@@ -1,18 +1,7 @@
 %ul{class: "toc #{list_class}"}
   - list.each do |item|
     %li
-      - level = item.depth
-      - item_class = case level
-        - when 0
-          - "icon-book"
-        - when 1
-          - "icon-file"
-        - else
-          - "icon-tint"
-
-      = link_to toc_path(section: item.id) do
-        %i{class: item_class}
-        = item.name
+      = link_to_item(item)
       - children = item.children rescue nil
       - if children && children.any?
         = link_to "#", class: "btn btn-primary toggle-children" do

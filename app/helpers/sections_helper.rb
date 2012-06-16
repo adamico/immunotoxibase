@@ -3,7 +3,7 @@ module SectionsHelper
     if section
       unless section.molecule?
         if can? :create, Section
-          link_to(new_section_path(parent_id: section.id), class: "btn btn-success") do
+          link_to(new_section_path(parent_id: section.to_param), class: "btn btn-success") do
             safe_concat(content_tag(:i, nil, class: "icon-plus icon-white") +
             "Add #{section.child_name}")
           end
@@ -45,9 +45,41 @@ module SectionsHelper
     list = section ? section.children : Section.roots
     children_title = section.depth == 0 ? "Chemical Families" : "Molecules" if section
     html = []
-    html << content_tag(:h3, children_title) if section
+    html << content_tag(:h3, children_title) if section && section.depth != 2
     html << render("list", list: list, list_class: "")
     html.join("").html_safe
+  end
+
+  def link_to_item(section, condition=false)
+    link_to_unless(condition, "<i class=\"#{icon_css_class(section)}\"></i> #{section.name}".html_safe, toc_path(chapter: get_tree_params(section)[:chapter].to_param, family: get_tree_params(section)[:family].to_param, molecule: get_tree_params(section)[:molecule].to_param))
+  end
+
+  def get_tree_params(section)
+    level = section.depth
+    case level
+      when 0
+        chapter = section
+      when 1
+        chapter = section.parent
+        family = section
+      else
+        chapter = section.parent.parent
+        family = section.parent
+        molecule = section
+      end
+    return {:chapter => chapter, :family => family, :molecule => molecule}
+  end
+
+  def icon_css_class(section)
+    level = section.depth
+    case level
+      when 0
+        icon_class = "icon-book"
+      when 1
+        icon_class = "icon-file"
+      else
+        icon_class = "icon-tint"
+      end
   end
 
   def maj(section)
@@ -60,6 +92,7 @@ module SectionsHelper
       end
     end
   end
+
   def link_to_edit(section)
     if @section
       if can? :edit, @section
@@ -76,13 +109,13 @@ module SectionsHelper
     content_tag :h1, title
   end
 
-  def breadcrumb(section)
+  def breadcrumb(section, depth)
     if section
       content_tag :ul, class: "breadcrumb" do
         lis = []
         lis << toc_crumb
         section.self_and_ancestors.each do |branch|
-          lis << crumb(branch)
+          lis << crumb(branch, depth)
         end
         lis.join("").html_safe
       end
@@ -92,20 +125,19 @@ module SectionsHelper
   private
 
   def toc_crumb
-    content_tag(:li, link_to("Table of Contents", toc_path) + crumb_divider)
+    content_tag(:li, link_to("Table of Contents", toc_path))
   end
 
   def crumb_divider(divider=">")
-    (" " + content_tag(:span, divider, class: "divider")).html_safe
+    (content_tag(:span, divider, class: "divider")).html_safe
   end
 
-  def crumb(item)
-    not_current = item.id != params[:section].to_i
-    item_class = not_current ? nil : "active"
-    content_tag(:li, nil, class: item_class) do
-      content = link_to_if(not_current, item.name, toc_path(section: item))
-      content += crumb_divider if not_current
-      content.html_safe
-    end.html_safe
+  def crumb(item, depth)
+    current = item.depth_name == depth
+    item_class = current ? "active" : nil
+    contents = []
+    contents << crumb_divider
+    contents << link_to_item(item, current)
+    content_tag :li, contents.join("").html_safe, class: item_class
   end
 end
