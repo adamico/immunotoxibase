@@ -9,6 +9,13 @@ GIT
       cocaine (>= 0.0.2)
       mime-types
 
+GIT
+  remote: https://github.com/maxim/bootswatch-rails.git
+  revision: b6bc761a5e43607f74536e8f6352d23e55e89c06
+  specs:
+    bootswatch-rails (0.0.11)
+      railties (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -44,7 +51,7 @@ GEM
     awesome_nested_set (2.1.3)
       activerecord (>= 3.0.0)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.0.2)
+    bootstrap-sass (2.0.3.1)
     builder (3.0.0)
     cancan (1.6.7)
     capybara (1.1.2)
@@ -248,7 +255,8 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_nested_set (~> 2.1.0)
-  bootstrap-sass (>= 2.0.1)
+  bootstrap-sass (~> 2.0.3)
+  bootswatch-rails!
   cancan
   capybara
   coffee-filter
