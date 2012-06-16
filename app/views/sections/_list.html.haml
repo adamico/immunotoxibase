@@ -15,6 +15,6 @@
         = item.name
       - children = item.children rescue nil
       - if children && children.any?
-        = link_to "#", class: "btn toggle-children" do
-          %i.icon-plus
+        = link_to "#", class: "btn btn-primary toggle-children" do
+          %i.icon-plus.icon-white
         = render "list", list: children, list_class: "children"
