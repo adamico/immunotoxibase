@@ -1,0 +1,12 @@
+.fields
+  = f.association :measure
+  = f.association :species
+  = f.input :condition
+  = f.input :effet
+  = f.input :level
+  = f.input :evolution, collection: [["Decrease", -1],["Unchanged", 0], ["Increase", 1]], as: :radio_buttons, item_wrapper_class: "inline"
+  = f.association :reference
+  = f.input :_destroy, as: :hidden
+  = link_to "#", class: "btn btn-danger remove_fields" do
+    %i.icon-white.icon-trash
+    Remove Assessment

@@ -36,7 +36,7 @@ class Section < ActiveRecord::Base
   end
 
   def molecule?
-    depth == 2
+    depth ? depth == 2 : parent.depth == 1
   end
 
   def to_s

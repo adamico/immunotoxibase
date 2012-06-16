@@ -51,6 +51,6 @@ class SectionsController < ApplicationController
     else
       depth = "molecule"
     end
-    depth
+    @depth ||= depth
   end
 end
