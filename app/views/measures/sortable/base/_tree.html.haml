@@ -1,5 +1,5 @@
 .sortable
-  = render :partial => "#{opts[:path]}/new", :locals => { :opts => opts }
+  = render "#{opts[:path]}/new", :opts => opts
   - unless tree.empty?
     :javascript
       $(function() {
