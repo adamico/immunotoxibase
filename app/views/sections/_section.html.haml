@@ -1,17 +1,17 @@
 %article
   %header
-    = breadcrumb(@section)
+    = breadcrumb(section)
     %h1
-      = @section.name
-      = @section.link_to_pdf
-    = @section.maj
-    - if can? :edit, @section
-      = link_to edit_section_path(@section), class: "btn btn-inverse" do
+      = section.name
+      = section.link_to_pdf
+    = section.maj
+    - if can? :edit, section
+      = link_to edit_section_path(section), class: "btn btn-inverse" do
         %i.icon-white.icon-pencil
-        Edit this #{@section.depth_name}
+        Edit this #{section.depth_name}
   %hr
-  %section.description= simple_format @section.description
-  %section.children= @section.children
-  = new_child_of(@section)
-  %section.assessments= @section.assessments
+  %section.description= simple_format section.description
+  %section.children= section.children
+  = new_child_of(section)
+  %section.assessments= section.assessments
   %footer
