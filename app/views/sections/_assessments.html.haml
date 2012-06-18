@@ -18,9 +18,9 @@
     - ass_by_parent.group_by{|a| a.measure}.each do |measure, ass_by_measure|
       - ass_by_measure.each do |assessment|
         %tr
-          %td.measure_name= assessment.measure.name
-          %td= assessment.species.name
+          %td.measure_name= assessment.measure_name
+          %td= assessment.species_name
           %td= assessment.condition
           %td= assessment.effet + " " + assessment.evolution.to_s
           %td= assessment.level
-          %td= assessment.reference_id rescue ""
+          %td= assessment.reference rescue "-"
