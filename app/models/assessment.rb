@@ -5,4 +5,7 @@ class Assessment < ActiveRecord::Base
   belongs_to :molecule, class_name: "Section"
   belongs_to :measure
   belongs_to :species
+
+  delegate :name, to: :measure, prefix: true, allow_nil: true
+  delegate :name, to: :species, prefix: true, allow_nil: true
 end
