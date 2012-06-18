@@ -49,5 +49,53 @@ namespace :db do
         section.save!
       end
     end
+    puts "importing measures without parents"
+    CSV.foreach("db/data/csv/measures.csv", headers: true, header_converters: :symbol) do |row|
+      if Measure.find_by_name(row[:name])
+        puts "skipping existing Measure : #{row[:name]}"
+      else
+        measure = Measure.create!(name: row[:name], old_id: row[:old_id])
+      end
+    end
+    puts "assigning measures parents"
+    CSV.foreach("db/data/csv/measures.csv", headers: true, header_converters: :symbol) do |row|
+      measure = Measure.find_by_name(row[:name])
+      puts "processing measure : #{measure.name}"
+      parent = Measure.find_by_old_id(row[:parent_id])
+      if parent
+        puts "assigning parent measure : #{parent.name}"
+        measure.parent = parent
+        puts "saving measure"
+        measure.save!
+        puts "done"
+      else
+        puts "this measure is a root element, skipping"
+      end
+    end
+    puts "importing assessments"
+    CSV.foreach("db/data/csv/assessments.csv", headers: true, header_converters: :symbol) do |row|
+      if Assessment.find_by_old_id(row[:old_id])
+        puts "skipping existing Assessment: #{row[:old_id]}"
+      else
+        assessment = Assessment.new(row.to_hash)
+        puts "initialising '#{assessment.old_id}' assessment"
+        molecule = Section.find_by_old_id("m" + row[:molecule_id].to_s)
+        if molecule
+          puts "assigning molecule section : #{molecule.name}"
+          assessment.molecule = molecule
+          measure = Measure.find_by_old_id(row[:measure_id])
+          puts "assigning measure : #{measure.name}"
+          assessment.measure = measure
+          species = Species.find_by_old_id(row[:species_id])
+          reference = Reference.find_by_old_id(row[:reference_id])
+          puts "assigning reference : #{reference.name}"
+          assessment.reference = reference
+          puts "saving"
+          assessment.save!
+        else
+          puts "skipping this assessment, molecule not found"
+        end
+      end
+    end
   end
 end
