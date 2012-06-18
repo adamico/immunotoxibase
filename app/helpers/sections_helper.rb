@@ -80,7 +80,7 @@ module SectionsHelper
   end
 
   def maj(section)
-    if section && section.maj.present?
+    if section && section.maj?
       content_tag :span, class: "timestamps" do
         ["(Last update: ",
           content_tag(:time, l(section.maj.to_date, format: :long), datetime: l(section.maj.to_date, format: :long)),
