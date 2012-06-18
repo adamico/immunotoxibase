@@ -4,4 +4,8 @@ class Reference < ActiveRecord::Base
   has_many :assessments
 
   validate :name, presence: true
+
+  def to_s
+    id
+  end
 end
