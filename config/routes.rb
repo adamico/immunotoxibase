@@ -4,7 +4,11 @@ Immunotoxibase::Application.routes.draw do
   match "admin" => "home#admin"
 
   scope "/admin" do
-    resources :sections, except: [:show, :index]
+    resources :sections, except: [:show, :index] do
+      collection do
+        get :autocomplete_reference_description
+      end
+    end
     resources :measures, except: [:show, :index] do
       collection do
         get :tree

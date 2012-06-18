@@ -14,6 +14,7 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
+//= require autocomplete-rails
 //= require jquery.ui.nestedSortable
 //= require sortable/base
 //= require common

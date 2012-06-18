@@ -3,6 +3,16 @@ class SectionsController < ApplicationController
 
   helper_method :current_section_depth
 
+  def autocomplete_reference_description
+    term = params[:term]
+    if term && term.present?
+      items = Reference.where("LOWER(description) like ?", term.downcase + "%").limit(20).order(:description)
+    else
+      items = {}
+    end
+    render json: json_for_autocomplete(items, :description)
+  end
+
   def toc
     section = Section.find(params[current_section_depth]) if current_section_depth
     @depth = current_section_depth

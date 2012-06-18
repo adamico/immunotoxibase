@@ -46,3 +46,4 @@ gem "fog"
 gem "draper"
 gem "friendly_id", "~> 4.0.1"
 gem "ranked-model"
+gem 'rails3-jquery-autocomplete'

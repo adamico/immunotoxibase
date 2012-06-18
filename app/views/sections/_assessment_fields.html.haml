@@ -5,7 +5,10 @@
   = f.input :effet
   = f.input :level
   = f.input :evolution, collection: Assessment::EVOLUTION, as: :radio_buttons, item_wrapper_class: "inline"
-  = f.association :reference, label_method: :oldid_or_id, input_html: {class: "span1"}
+  .control-group#reference_id_field
+    = f.label :reference_description, "Reference"
+    .controls
+      = f.autocomplete_field :reference_description, autocomplete_reference_description_sections_path, class: "span8"
   = f.input :_destroy, as: :hidden
   = link_to "#", class: "btn btn-danger remove_fields" do
     %i.icon-white.icon-trash
