@@ -5,4 +5,8 @@ class Species < ActiveRecord::Base
   has_many :molecules, through: :assessments, dependent: :destroy
 
   validate :name, presence: true
+
+  def to_s
+    name
+  end
 end
