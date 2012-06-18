@@ -6,10 +6,9 @@ class Assessment < ActiveRecord::Base
   belongs_to :measure
   belongs_to :species
 
-  delegate :name, to: :measure, prefix: true, allow_nil: true
-  delegate :name, to: :species, prefix: true, allow_nil: true
-
   include RankedModel
   ranks :row_order,
     with_same: :molecule_id
+
+  EVOLUTION = [["<i class='icon-arrow-down'></i>".html_safe, -1],["<i class='icon-resize-horizontal'></i>".html_safe, 0], ["<i class='icon-arrow-up'></i>".html_safe, 1]]
 end

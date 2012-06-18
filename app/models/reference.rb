@@ -5,7 +5,11 @@ class Reference < ActiveRecord::Base
 
   validate :name, presence: true
 
+  def oldid_or_id
+    old_id ? old_id : id
+  end
+
   def to_s
-    id
+    oldid_or_id
   end
 end
