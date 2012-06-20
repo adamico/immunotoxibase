@@ -17,6 +17,7 @@
 //= require cocoon
 //= require autocomplete-rails
 //= require jquery.ui.nestedSortable
+//= require jquery.tablednd.js
 //= require sortable/base
 //= require common
 //= require ra.remote-form

@@ -6,6 +6,7 @@ Immunotoxibase::Application.routes.draw do
   scope "/admin" do
     resources :sections, except: [:show, :index] do
       collection do
+        post :sort
         get :autocomplete_reference_description
       end
     end

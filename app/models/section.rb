@@ -15,7 +15,7 @@ class Section < ActiveRecord::Base
 
   validates :name, presence: true
 
-  has_many :assessments, foreign_key: "molecule_id"
+  has_many :assessments, foreign_key: "molecule_id", order: "position"
   has_many :measures, through: :assessments, dependent: :destroy
   has_many :species, through: :assessments, dependent: :destroy
 

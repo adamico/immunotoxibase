@@ -3,6 +3,13 @@ class SectionsController < ApplicationController
 
   helper_method :current_section_depth
 
+  def sort
+    params[:assessments].compact.each_with_index do |id, index|
+      Assessment.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
+  end
+
   def autocomplete_reference_description
     term = params[:term]
     if term && term.present?

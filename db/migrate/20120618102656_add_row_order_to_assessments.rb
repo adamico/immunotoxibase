@@ -1,5 +1,5 @@
 class AddRowOrderToAssessments < ActiveRecord::Migration
   def change
-    add_column :assessments, :row_order, :integer
+    add_column :assessments, :position, :integer
   end
 end

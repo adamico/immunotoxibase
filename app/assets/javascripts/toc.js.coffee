@@ -1,14 +1,24 @@
 $ = jQuery
 $ ->
+  $("#assessments").tableDnD
+    onDrop: (table, row) ->
+      $.post("/admin/sections/sort", $.tableDnD.serialize())
+    dragHandle: ".dragHandle"
+    serializeRegexp: /[^\_]*$/
+
+  $("#assessments tr").hover(
+    -> $(this.cells[0]).addClass('showDragHandle'),
+    -> $(this.cells[0]).removeClass('showDragHandle'))
+
   $(".toggle-children").on "click", (e) ->
     $(this).next().toggle()
     toggleMinusPlus($(this))
     e.preventDefault()
 
-  rows = $(".molecule_assessments tr")
+  rows = $("#assessments tr")
   for i in [rows.length..0]
     $row = $(rows[i])
-    selected_columns = [$row.find("td")[0], $row.find("td")[1], $row.find("td")[2]]
+    selected_columns = [$row.find("td")[1], $row.find("td")[2], $row.find("td")[3]]
     for cell, i in selected_columns
       $cell = $(cell)
       $prev_cell_in_col = $($cell.parent().prev().find("td")[i])
