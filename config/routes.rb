@@ -9,6 +9,7 @@ Immunotoxibase::Application.routes.draw do
         get :autocomplete_reference_description
       end
     end
+    resources :references, except: [:show, :index]
     resources :measures, except: [:show, :index] do
       collection do
         get :tree

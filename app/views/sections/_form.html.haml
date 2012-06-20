@@ -7,9 +7,13 @@
   = form.input :picture, as: :file
   = form.input :description, input_html: {class: "wymeditor"}
   - if section.molecule?
-    = form.fields_for :assessments do |builder|
-      = render 'assessment_fields', f: builder
-    = link_to_add_fields "Add Assessment", form, :assessments
+    #assessments
+      = form.simple_fields_for :assessments do |assessment|
+        = render 'assessment_fields', f: assessment
+      .links
+        = link_to_add_association form, :assessments, class: "btn btn-primary" do
+          %i.icon-white.icon-plus
+          Add assessment
 
   .actions
     = button_tag type: :submit, class: "btn btn-success" do

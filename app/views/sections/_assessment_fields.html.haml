@@ -1,15 +1,23 @@
-.fields
+.nested-fields
   = f.association :measure
   = f.association :species
   = f.input :condition
   = f.input :effet
   = f.input :level
   = f.input :evolution, collection: Assessment::EVOLUTION, as: :radio_buttons, item_wrapper_class: "inline"
-  .control-group#reference_id_field
-    = f.label :reference_description, "Reference"
+
+  .control-group.reference_id_field
+    = f.label :reference_description, "Reference", class: "control-label"
     .controls
-      = f.autocomplete_field :reference_description, autocomplete_reference_description_sections_path, class: "span8"
+      = f.autocomplete_field :reference_description, autocomplete_reference_description_sections_path, class: "span8",id_element: "#section_assessments_attributes_UN_reference_description"
+      = link_to "#", data: {link: new_reference_path(modal: true)}, class: "btn btn-primary create" do
+        %i.icon-plus.icon-white
+        Add new
+      = link_to "#", data: {link: edit_reference_path(modal: true, id: "__ID__")}, class: "btn btn-info update" do
+        %i.icon-pencil.icon-white
+        See/edit
+      = f.hidden_field :reference_id, class: "reference_id"
   = f.input :_destroy, as: :hidden
-  = link_to "#", class: "btn btn-danger remove_fields" do
+  = link_to_remove_association f, class: "btn btn-danger" do
     %i.icon-white.icon-trash
     Remove Assessment

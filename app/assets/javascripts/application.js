@@ -14,8 +14,10 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
+//= require cocoon
 //= require autocomplete-rails
 //= require jquery.ui.nestedSortable
 //= require sortable/base
 //= require common
+//= require ra.remote-form
 //= require_tree .
