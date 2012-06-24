@@ -107,13 +107,15 @@ module SectionsHelper
 
   def breadcrumb(section, depth)
     if section
-      content_tag :ul, class: "breadcrumb" do
-        lis = []
-        lis << toc_crumb
-        section.self_and_ancestors.each do |branch|
-          lis << crumb(branch, depth)
+      content_tag :div, class: "subnav" do
+        content_tag :ul, class: "breadcrumb" do
+          lis = []
+          lis << toc_crumb
+          section.self_and_ancestors.each do |branch|
+            lis << crumb(branch, depth)
+          end
+          lis.join("").html_safe
         end
-        lis.join("").html_safe
       end
     end
   end
