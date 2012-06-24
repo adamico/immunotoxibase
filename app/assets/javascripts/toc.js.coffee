@@ -6,17 +6,25 @@ $ ->
     $(this).next().toggle()
     toggleMinusPlus($(this))
 
-  $("#reorder_assessments").on "click", (e) ->
+  assignReorderAssessments $("#reorder_assessments")
+
+assignDoneReordering = (element) ->
+  element.one "click", (e) ->
+    e.preventDefault()
+    $("#reorder_assessments").toggle()#Class("disabled")
+    dontRepeatCells()
+    $(this).toggle()#Class("disabled")
+    $("#assessments tr").unbind()
+    assignReorderAssessments $("#reorder_assessments")
+
+assignReorderAssessments = (element) ->
+  element.one "click", (e) ->
     e.preventDefault()
     recoverCellContent $("#assessments")
-    $(this).toggleClass("disabled")
-    $("#done_reordering").toggleClass("disabled")
+    $(this).toggle()#Class("disabled")
     setupDnDTable()
-    $("#done_reordering").on "click", (e) ->
-      e.preventDefault()
-      $(this).toggleClass("disabled")
-      $("#reorder_assessments").toggleClass("disabled")
-      dontRepeatCells()
+    $("#done_reordering").toggle()#Class("disabled")
+    assignDoneReordering $("#done_reordering")
 
 dontRepeatCells = ->
   rows = $("#assessments tr")
@@ -36,7 +44,6 @@ toggleMinusPlus = (element) ->
   $icon.toggleClass("icon-plus icon-minus")
 
 recoverCellContent = (table) ->
-  console.log table
   for row in $(table).find("tr")
     for cell in $(row).find("td")
       value = $(cell).data("value")
