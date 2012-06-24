@@ -1,5 +1,5 @@
 %h3 Tabulated data
-%table.table.table-condensed.table-striped#assessments{data: {"update-url" => sort_sections_path}}
+%table.table.table-condensed.table-striped#assessments
   %tr
     %th &nbsp;
     %th{colspan: 2} Measured endpoints
@@ -11,10 +11,17 @@
   - AssessmentDecorator.decorate(assessments).each do |assessment|
     = content_tag_for :tr, assessment do
       %td.dragHandle &nbsp;
-      %td= assessment.measure.parent
-      %td= assessment.measure
-      %td= assessment.species
-      %td= assessment.condition
-      %td= assessment.effet_and_evolution
-      %td= assessment.level
-      %td= assessment.reference
+      %td{data: {value: value = assessment.measure.parent}}= value
+      %td{data: {value: value = assessment.measure}}= value
+      %td{data: {value: value = assessment.species}}= value
+      %td{data: {value: value = assessment.condition}}= value
+      %td{data: {value: value = assessment.effet_and_evolution}}= value
+      %td{data: {value: value = assessment.level}}= value
+      %td{data: {value: value = assessment.reference}}= value
+- if current_user
+  = link_to "#", class: "btn btn-info", id: "reorder_assessments" do
+    %i.icon-white.icon-resize-vertical
+    Reorder assessments
+  = link_to "#", class: "btn btn-success disabled", id: "done_reordering" do
+    %i.icon-white.icon-ok
+    Done

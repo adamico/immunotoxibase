@@ -10,6 +10,6 @@ class Reference < ActiveRecord::Base
   end
 
   def to_s
-    oldid_or_id
+    oldid_or_id.to_s
   end
 end
