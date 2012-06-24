@@ -8,6 +8,7 @@ group :assets do
   gem "compass-rails"
   gem "bootstrap-sass", "~> 2.0.3"
   gem 'bootswatch-rails', git: "https://github.com/maxim/bootswatch-rails.git"
+  gem "jquery-ui-rails"
 end
 
 group :test, :development do
