@@ -17,7 +17,7 @@
       %td{data: {value: value = assessment.condition}}= value
       %td{data: {value: value = assessment.effet_and_evolution}}= value
       %td{data: {value: value = assessment.level}}= value
-      %td{data: {value: value = assessment.reference}}= value
+      %td{data: {value: reference = assessment.reference}}= link_to reference, "#", rel: "modal", data: {reference: reference.to_s, title: reference.description, authors: reference.name, link: (reference.url if reference.url) }
 - if current_user
   = link_to "#", class: "btn btn-info", id: "reorder_assessments" do
     %i.icon-white.icon-resize-vertical

@@ -1,12 +1,36 @@
 $ = jQuery
 $ ->
-  dontRepeatCells()
+  $("a[rel='modal']").on "click", (e) ->
+    bindReferenceModalOpening(e, this)
+
   $(".toggle-children").on "click", (e) ->
     e.preventDefault()
     $(this).next().toggle()
     toggleMinusPlus($(this))
 
+  dontRepeatCells()
   assignReorderAssessments $("#reorder_assessments")
+
+bindReferenceModalOpening = (e, element) ->
+  e.preventDefault()
+  getReferenceModal(element)
+
+getReferenceModal = (element) ->
+  widget = $(element)
+  body = "#{widget.data('title')} - #{widget.data('authors')}"
+  link = widget.data('link')
+  body = "<a target=\"_blank\" href=\"#{link}\">" + body + "</a>" if link
+  dialog = $("
+    <div id=\"modal\" class=\"modal fade\">
+      <div class=\"modal-header\">
+        <a href=\"#\" class=\"close\" data-dismiss=\"modal\">&times;</a>
+        <h3 class=\"modal-header-title\">Reference #{widget.data('reference')}</h3>
+      </div>
+      <div class=\"modal-body\"><p>#{body}</div>
+    </div>")
+    .modal
+      keyboard: true
+  return dialog.modal('show')
 
 assignDoneReordering = (element) ->
   element.one "click", (e) ->
