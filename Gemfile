@@ -28,6 +28,7 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'    # So you can do Then show me the page
   gem 'pickle'
+  gem 'simplecov', require: false
 end
 
 gem 'jquery-rails'
