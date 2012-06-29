@@ -14,6 +14,7 @@ Spork.prefork do
   require 'rspec/rails'
   require 'capybara/rspec'
   require 'database_cleaner'
+  require 'draper/rspec_integration'
 
   unless ENV['DRB']
     require 'simplecov'
