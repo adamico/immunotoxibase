@@ -21,7 +21,7 @@ group :development do
 end
 
 group :test do
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', "~> 3.0"
   gem 'spork', '~> 0.9.0.rc'
   gem 'capybara'
   gem 'cucumber-rails', require: false
