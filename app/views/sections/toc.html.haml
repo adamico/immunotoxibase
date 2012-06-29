@@ -6,7 +6,7 @@
   %hr
   - if @section
     %section.description= simple_format @section.description
-    %section.assessments= @section.assessments
+    %section.assessments= render "assessments", assessments: @section.assessments if section.molecule? && section.assessments.any?
   = children_list(@section)
   %footer
     = link_to_edit(@section)
