@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120616122927) do
+ActiveRecord::Schema.define(:version => 20120618102656) do
 
   create_table "assessments", :force => true do |t|
     t.integer  "reference_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20120616122927) do
     t.datetime "maj"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "position"
   end
 
   add_index "assessments", ["measure_id"], :name => "index_assessments_on_measure_id"
