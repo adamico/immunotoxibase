@@ -9,6 +9,8 @@ class Measure < ActiveRecord::Base
 
   validate :name, presence: true
 
+  default_scope order(:name)
+
   def to_s
     name
   end
