@@ -42,7 +42,7 @@ class SectionsController < ApplicationController
   end
 
   def update
-    if @section.update_attributes
+    if @section.update_attributes(params[:section])
       redirect_to @section, notice: "Successfully updated #{@section}"
     else
       render :edit
