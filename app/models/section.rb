@@ -3,7 +3,7 @@ class Section < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  attr_accessible :name, :description, :picture, :maj, :parent_id, :old_id, :assessments_attributes, :slug
+  attr_accessible :name, :description, :picture, :maj, :parent_id, :old_id, :assessments_attributes, :slug, :delete_picture
 
   acts_as_nested_set
 
@@ -16,6 +16,8 @@ class Section < ActiveRecord::Base
                       }
 
   validates :name, presence: true
+
+  before_validation :clear_picture
 
   has_many :assessments, foreign_key: "molecule_id", order: "position"
   has_many :measures, through: :assessments, dependent: :destroy
@@ -56,4 +58,18 @@ class Section < ActiveRecord::Base
       scoped
     end
   end
+
+  def clear_picture
+    self.picture = nil if delete_picture? && !picture.dirty?
+  end
+
+  def delete_picture=(value)
+    @delete_picture = !value.to_i.zero?
+  end
+
+  def delete_picture
+    !!@delete_picture
+  end
+
+  alias_method :delete_picture?, :delete_picture
 end

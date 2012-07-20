@@ -2,9 +2,17 @@
   %script{type: "text/javascript", src: "/javascripts/wymeditor/jquery.wymeditor.min.js"}
 
 = simple_form_for section, html: {class: "form-horizontal", multipart: true} do |form|
+  .actions= render 'actions', section: section
   = form.input :parent_id, as: :hidden
   = form.input :name, input_html: {class: "span5"}
+  - unless section.new_record? || !section.picture?
+    #current_picture
+      = image_tag section.picture.url, alt: "Picture", title: "Current picture"
+      %label.checkbox
+        = form.check_box :delete_picture
+        Delete current picture?
   = form.input :picture, as: :file
+
   = form.input :description, input_html: {class: "wymeditor"}
   - if section.molecule?
     #assessments
@@ -15,14 +23,7 @@
           %i.icon-white.icon-plus
           Add assessment
 
-  .actions
-    = button_tag type: :submit, class: "btn btn-success" do
-      %i.icon-white.icon-ok
-      Save
-    = button_tag type: :reset, class: "btn btn-danger" do
-      %i.icon-white.icon-remove
-      Reset
-    = back_to_record(section)
+  .actions= render 'actions', section: section
 
 :coffeescript
   $(".wymeditor").wymeditor
