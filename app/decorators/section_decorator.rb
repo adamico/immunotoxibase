@@ -1,12 +1,6 @@
 class SectionDecorator < ApplicationDecorator
   decorates :section
 
-  def assessments
-    if section.molecule? && section.assessments.any?
-      h.render "assessments", assessments: section.assessments
-    end
-  end
-
   def picture_for
     if section.molecule?
       h.image_tag section.picture.url if section.picture.present?
