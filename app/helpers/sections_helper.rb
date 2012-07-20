@@ -47,23 +47,7 @@ module SectionsHelper
   end
 
   def link_to_item(section, condition=false, name=section.name, css_class = nil)
-    link_to_unless(condition, "<i class=\"#{icon_css_class(section)}\"></i> #{name}".html_safe, toc_path(chapter: get_tree_params(section)[:chapter].to_param, family: get_tree_params(section)[:family].to_param, molecule: get_tree_params(section)[:molecule].to_param), class: css_class)
-  end
-
-  def get_tree_params(section)
-    level = section.depth
-    case level
-      when 0
-        chapter = section
-      when 1
-        chapter = section.parent
-        family = section
-      else
-        chapter = section.parent.parent
-        family = section.parent
-        molecule = section
-      end
-    return {:chapter => chapter, :family => family, :molecule => molecule}
+    link_to_unless(condition, "<i class=\"#{icon_css_class(section)}\"></i> #{name}".html_safe, the_toc_path(section), class: css_class)
   end
 
   def icon_css_class(section)

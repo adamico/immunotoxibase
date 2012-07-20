@@ -35,7 +35,7 @@ class SectionsController < ApplicationController
 
   def create
     if @section.save
-      redirect_to @section, notice: "Successfully created #{@section}"
+      redirect_to the_toc_path(@section), notice: "Successfully created #{@section}"
     else
       render :new
     end
@@ -43,7 +43,7 @@ class SectionsController < ApplicationController
 
   def update
     if @section.update_attributes(params[:section])
-      redirect_to @section, notice: "Successfully updated #{@section}"
+      redirect_to the_toc_path(@section), notice: "Successfully updated #{@section}"
     else
       render :edit
     end
