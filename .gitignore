@@ -71,3 +71,4 @@ db/*.sqlite3
 # vim artifacts
 **.swp
 brakeman.html
+*.dump
