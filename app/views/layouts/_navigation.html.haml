@@ -9,9 +9,12 @@
       %i.icon-book.icon-white
       Table of Contents
   %li
-    = link_to "/search" do
-      %i.icon-search.icon-white
-      Search
+    = form_tag sections_path, method: :get, class: "navbar-search pull-left" do
+      .input-append
+        = text_field_tag :query, params[:query], class: "search-query"
+        = button_tag class: "btn btn-primary" do
+          %i.icon-white.icon-search
+
 %ul.nav.pull-right
   - if user_signed_in?
     %li
