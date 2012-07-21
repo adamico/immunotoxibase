@@ -51,14 +51,6 @@ class Section < ActiveRecord::Base
     name
   end
 
-  def self.text_search(query)
-    if query.present?
-      search(query)
-    else
-      scoped
-    end
-  end
-
   def clear_picture
     self.picture = nil if delete_picture? && !picture.dirty?
   end
