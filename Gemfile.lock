@@ -1,4 +1,17 @@
 GIT
+  remote: git://github.com/adamico/bootstrap-sass.git
+  revision: b2b7ba81afa955359f7ce6b22f115dbddbba2156
+  specs:
+    bootstrap-sass (2.0.4.0)
+
+GIT
+  remote: git://github.com/maxim/bootswatch-rails.git
+  revision: e10d270be22666b3d1921a7d6558c4aed1d074a2
+  specs:
+    bootswatch-rails (0.0.12)
+      railties (>= 3.1)
+
+GIT
   remote: git://github.com/thoughtbot/paperclip.git
   revision: 01406e1a4dad7819db896b477314b7f03aab3275
   specs:
@@ -8,18 +21,6 @@ GIT
       activesupport (>= 3.0.0)
       cocaine (>= 0.0.2)
       mime-types
-
-GIT
-  remote: https://github.com/maxim/bootswatch-rails.git
-  revision: b6bc761a5e43607f74536e8f6352d23e55e89c06
-  specs:
-    bootswatch-rails (0.0.11)
-      railties (>= 3.1)
-
-PATH
-  remote: ../bootstrap-sass
-  specs:
-    bootstrap-sass (2.0.4.0)
 
 GEM
   remote: https://rubygems.org/

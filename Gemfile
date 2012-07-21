@@ -6,8 +6,8 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem "compass-rails"
-  gem "bootstrap-sass", path: "../bootstrap-sass"
-  gem 'bootswatch-rails', git: "https://github.com/maxim/bootswatch-rails.git"
+  gem "bootstrap-sass", github: "adamico/bootstrap-sass"
+  gem 'bootswatch-rails', github: "maxim/bootswatch-rails"
   gem "jquery-ui-rails"
 end
 
@@ -43,7 +43,7 @@ gem "heroku"
 gem 'coffee-filter'
 gem 'awesome_nested_set', '~> 2.1.0'
 gem 'the_sortable_tree', "~> 1.9.2"
-gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem "paperclip", github: "thoughtbot/paperclip"
 gem "aws-sdk"
 gem "draper"
 gem "friendly_id", "~> 4.0.1"
