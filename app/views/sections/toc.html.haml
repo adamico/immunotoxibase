@@ -5,7 +5,7 @@
     = maj(@section)
   %hr
   - if @section
-    %section.picture= image_tag @section.picture.url if @section.picture
+    %section.picture= image_tag @section.picture.url if @section.picture?
     %section.description= simple_format @section.description
     %section.assessments= render "assessments", assessments: @section.assessments if @section.molecule? and @section.assessments
   = children_list(@section)
