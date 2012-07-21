@@ -19,6 +19,7 @@ Immunotoxibase::Application.routes.draw do
     end
   end
 
+  get "home/autocomplete_section_name"
   match "toc(/:chapter(/:family(/:molecule)))" => "sections#toc", as: "toc"
 
   root :to => "home#index"

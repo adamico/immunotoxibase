@@ -21,6 +21,7 @@ class SectionsController < ApplicationController
   end
 
   def toc
+    params[:molecule] = params[:molecule].present? ? params[:molecule].downcase : nil
     section = Section.find(params[current_section_depth]) if current_section_depth
     @depth = current_section_depth
     @section = SectionDecorator.find(section) if section

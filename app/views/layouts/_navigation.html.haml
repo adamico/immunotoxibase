@@ -8,19 +8,20 @@
     = link_to toc_path do
       %i.icon-book.icon-white
       Table of Contents
-  %li
-    = form_tag toc_path, method: :get, class: "navbar-search pull-left" do
-      .input-append
-        = text_field_tag :molecule, params[:molecule], class: "search-query"
-        = button_tag class: "btn btn-primary" do
-          %i.icon-white.icon-search
 
 %ul.nav.pull-right
+  %li
+    = form_tag toc_path, method: :get, class: "navbar-search" do
+      .input-append
+        = text_field_tag :molecule, params[:molecule], data: {provide: "typeahead"},
+          class: "search-query span2", autocomplete: "off"
+        = button_tag class: "btn btn-primary" do
+          %i.icon-white.icon-search
   - if user_signed_in?
     %li
       = link_to admin_path do
         %i.icon-cog.icon-white
-        Administration
+        Admin
     %li
       = link_to destroy_user_session_path, method: "delete" do
         %i.icon-user.icon-white
