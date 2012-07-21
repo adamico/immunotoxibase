@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/adamico/bootstrap-sass.git
-  revision: b2b7ba81afa955359f7ce6b22f115dbddbba2156
+  revision: 29453c57a64655c25e9d9db336170c4c9f3114fe
   specs:
     bootstrap-sass (2.0.4.0)
 
