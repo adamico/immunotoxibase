@@ -85,7 +85,7 @@ module SectionsHelper
   end
 
   def page_title(section)
-    title = section ? [section.name, section.link_to_pdf].compact.join("").html_safe : "Table of Contents"
+    title = section ? section.name : "Table of Contents"
     content_tag :h1, title
   end
 
