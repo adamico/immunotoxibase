@@ -16,6 +16,11 @@ GIT
     bootswatch-rails (0.0.11)
       railties (>= 3.1)
 
+PATH
+  remote: ../bootstrap-sass
+  specs:
+    bootstrap-sass (2.0.4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -57,7 +62,6 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.0.3.1)
     builder (3.0.0)
     cancan (1.6.7)
     capybara (1.1.2)
@@ -273,7 +277,7 @@ DEPENDENCIES
   acts_as_list
   awesome_nested_set (~> 2.1.0)
   aws-sdk
-  bootstrap-sass (~> 2.0.3)
+  bootstrap-sass!
   bootswatch-rails!
   cancan
   capybara
