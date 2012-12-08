@@ -50,4 +50,4 @@ gem "friendly_id", "~> 4.0.1"
 gem 'acts_as_list'
 gem 'rails3-jquery-autocomplete'
 gem "cocoon"
-gem 'newrelic_rpm'
+gem 'newrelic_rpm', "~> 3.5.3.25"
